@@ -1,0 +1,14 @@
+#---------------------------------------------------------------------------
+# Prompt
+#---------------------------------------------------------------------------
+COLOR_RED="\033[0;31m"
+COLOR_BROWN="\033[0;33m"
+COLOR_GREY="\033[0;97m"
+COLOR_GREEN="\033[0;32m"
+COLOR_BLUE="\033[0;34m"
+COLOR_PS_CLEAR="\033[0m"
+COLOR_SCREEN_ESC="\033k\033\134"
+
+ZSH_THEME="robbyrussell"
+plugins=(git)
+source $ZSH/oh-my-zsh.sh

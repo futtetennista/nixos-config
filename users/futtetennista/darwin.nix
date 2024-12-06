@@ -1,0 +1,58 @@
+{ inputs, pkgs, self, ... }:
+
+{
+  launchd = {
+    agents = {
+      docker-system-prune = {
+        serviceConfig = {
+          ProgramArguments = ["${pkgs.docker}/bin/docker" "system" "prune" "--force" "--volumes"] ;
+          # ProgramArguments = ["/run/current-system/sw/bin/docker" "-d"] ;
+          RunAtLoad = true;
+          StandardErrorPath = "/var/log/launch_agent-docker-system-prune.std-err";
+          StandardOutPath = "/var/log/launch_agent-docker-system-prune.out-err";
+          StartInterval = 86400;
+        };
+      };
+      nix-collect-garbage = {
+        serviceConfig = {
+          # Program = "${pkgs.nix}/bin/nix-collect-garbage";
+          ProgramArguments = ["/run/current-system/sw/bin/nix-collect-garbage" "-d"] ;
+          RunAtLoad = true;
+          StandardErrorPath = "/var/log/launch_agent-nix-collect-garbage.std-err";
+          StandardOutPath = "/var/log/launch_agent-nix-collect-garbage.std-out";
+          StartInterval = 604800;
+        };
+      };
+    };
+  };
+
+  nixpkgs.overlays = import ../../lib/overlays.nix ++ [
+    (import ./vim.nix { inherit inputs; })
+  ];
+
+  homebrew = {
+    enable = true;
+    casks  = [
+      "1password"
+      "alfred"
+      "anki"
+      # "cleanshot"
+      "discord"
+      "firefox"
+      "google-chrome"
+      "openoffice"
+      "raycast"
+      "rectangle"
+      "slack"
+      "spotify"
+      "visual-studio-code"
+    ];
+  };
+
+  # The user should already exist, but we need to set this up so Nix knows
+  # what our home directory is (https://github.com/LnL7/nix-darwin/issues/423).
+  users.users.futtetennista = {
+    home = "/Users/futtetennista";
+    shell = pkgs.zsh;
+  };
+}
