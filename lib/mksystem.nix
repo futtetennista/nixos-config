@@ -7,7 +7,8 @@ name:
   system,
   user,
   darwin ? false,
-  wsl ? false
+  wsl ? false,
+  version ? ""
 }:
 
 let
@@ -15,7 +16,8 @@ let
   isWSL = wsl;
 
   # The config files for this system.
-  machineConfig = ../machines/${name}.nix;
+  machineConfig = ../machines/${if darwin then builtins.substring 0 11 name else name}.nix;
+  # If darwin, split the name on "-" and take the first two elements, then join on "-"
   # Use 'darwin.nix' or 'nixos.nix' depending on the current platform
   userOSConfig = ../users/${user}/${if darwin then "darwin" else "nixos" }.nix;
   userHMConfig = ../users/${user}/home-manager.nix;
@@ -56,6 +58,7 @@ in systemFunc rec {
       config._module.args = {
         currentSystem = system;
         currentSystemName = name;
+        currentSystemVersion = if darwin then (if version != "" then version else "Sequoia15") else "";
         currentSystemUser = user;
         isWSL = isWSL;
         inputs = inputs;

@@ -7,6 +7,9 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
 
+  #---------------------------------------------------------------------
+  # VS Code extensions not available in nixpkgs
+  #---------------------------------------------------------------------
   sjurmillidahl.ormolu-vscode = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
     nativeBuildInputs = with pkgs; [
       jq
@@ -145,14 +148,18 @@ in {
     };
   };
 
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     # shellOptions = [];
     # historyControl = [ "ignoredups" "ignorespace" ];
-    initExtra = builtins.readFile ./zshrc;
+    # initExtra = builtins.readFile ./zshrc;
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" ];
+      theme = "robbyrussell";
+    };
 
     shellAliases = {
       ga = "git add";
@@ -215,6 +222,14 @@ in {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
       # arcanis.vscode-zipfs
+      # googlecloudtools.cloudcode
+      # jcanero.hoogle-vscode
+      # lextudio.restructuredtext
+      # mathematic.vscode-pdf
+      # ms-ossdata.vscode-postgresql
+      # ms-vscode.remote-explorer
+      # trond-snekvik.simple-rst
+      # visortelle.haskell-spotlight
       bbenoist.nix
       bierner.markdown-mermaid
       dbaeumer.vscode-eslint
@@ -224,17 +239,12 @@ in {
       github.copilot-chat
       github.vscode-github-actions
       github.vscode-pull-request-github
-      # googlecloudtools.cloudcode
       hashicorp.terraform
       haskell.haskell
-      # jcanero.hoogle-vscode
       justusadam.language-haskell
-      # lextudio.restructuredtext
-      # mathematic.vscode-pdf
       mathiasfrohlich.kotlin
       ms-azuretools.vscode-docker
       ms-kubernetes-tools.vscode-kubernetes-tools
-      # ms-ossdata.vscode-postgresql
       ms-python.debugpy
       ms-python.isort
       ms-python.python
@@ -249,15 +259,11 @@ in {
       ms-vscode-remote.remote-ssh-edit
       ms-vscode.live-server
       ms-vscode.makefile-tools
-      # ms-vscode.remote-explorer
       redhat.vscode-yaml
       reditorsupport.r
-      # runem.lit-plugin
       scala-lang.scala
       scalameta.metals
       sjurmillidahl.ormolu-vscode
-      # trond-snekvik.simple-rst
-      # visortelle.haskell-spotlight
       vscodevim.vim
     ];
   };
