@@ -82,15 +82,10 @@
       system = "x86_64-darwin";
       user = "futtetennista";
       darwin = true;
+      version = "Monterey12";
     };
 
     darwinConfigurations.macbook-pro-m1 = mkSystem "macbook-pro-m1" {
-      system = "aarch64-darwin";
-      user = "futtetennista";
-      darwin = true;
-    };
-
-    darwinConfigurations.macbook-pro = mkSystem "macbook-pro" {
       system = "aarch64-darwin";
       user = "futtetennista";
       darwin = true;

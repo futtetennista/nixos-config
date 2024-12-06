@@ -5,8 +5,7 @@
     agents = {
       docker-system-prune = {
         serviceConfig = {
-          ProgramArguments = ["${pkgs.docker}/bin/docker" "system" "prune" "--force" "--volumes"] ;
-          # ProgramArguments = ["/run/current-system/sw/bin/docker" "-d"] ;
+          ProgramArguments = ["/run/current-system/sw/bin/docker" "system" "prune" "--force" "--volumes"] ;
           RunAtLoad = true;
           StandardErrorPath = "/var/log/launch_agent-docker-system-prune.std-err";
           StandardOutPath = "/var/log/launch_agent-docker-system-prune.out-err";
@@ -15,7 +14,6 @@
       };
       nix-collect-garbage = {
         serviceConfig = {
-          # Program = "${pkgs.nix}/bin/nix-collect-garbage";
           ProgramArguments = ["/run/current-system/sw/bin/nix-collect-garbage" "-d"] ;
           RunAtLoad = true;
           StandardErrorPath = "/var/log/launch_agent-nix-collect-garbage.std-err";
