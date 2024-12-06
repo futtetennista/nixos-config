@@ -16,11 +16,12 @@ let
 
   # The config files for this system.
   machineConfig = ../machines/${name}.nix;
+  # Use 'darwin.nix' or 'nixos.nix' depending on the current platform
   userOSConfig = ../users/${user}/${if darwin then "darwin" else "nixos" }.nix;
   userHMConfig = ../users/${user}/home-manager.nix;
 
   # NixOS vs nix-darwin functionst
-  systemFunc = if darwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
+  systemFunc = if darwin then inputs.nix-darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
   home-manager = if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
 in systemFunc rec {
   inherit system;
@@ -40,6 +41,7 @@ in systemFunc rec {
     machineConfig
     userOSConfig
     home-manager.home-manager {
+      home-manager.backupFileExtension = "home-manager-backup";
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.${user} = import userHMConfig {

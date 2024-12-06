@@ -1,0 +1,191 @@
+{
+  "pins": {
+    "nixpkgs": {
+      "type": "Channel",
+      "name": "nixpkgs-unstable",
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-25.05pre716127.566e53c2ad75/nixexprs.tar.xz",
+      "hash": "182d5xq2w70znk61b8bn0cyq4jmp7vw239vmxbmsvv13zrjainbv"
+    },
+    "ohmyzsh": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "ohmyzsh",
+        "repo": "ohmyzsh"
+      },
+      "branch": "master",
+      "revision": "69a6359f7cf8978d464573fb7b023ee3cd00181a",
+      "url": "https://github.com/ohmyzsh/ohmyzsh/archive/69a6359f7cf8978d464573fb7b023ee3cd00181a.tar.gz",
+      "hash": "15pd529020swl36fysw5yfp39mjcsbi85mwf28hxchs607ghhp6z"
+    },
+    "tmux-dracula": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "dracula",
+        "repo": "tmux"
+      },
+      "branch": "master",
+      "revision": "5eb04b9db918bdfbf6928fc3b59942efb7de6e54",
+      "url": "https://github.com/dracula/tmux/archive/5eb04b9db918bdfbf6928fc3b59942efb7de6e54.tar.gz",
+      "hash": "06bvi2zlfqd4g8z9sviymzj1zd4y4872ckv85lx3gh8ilk4hz3jm"
+    },
+    "tmux-pain-control": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tmux-plugins",
+        "repo": "tmux-pain-control"
+      },
+      "branch": "master",
+      "revision": "32b760f6652f2305dfef0acd444afc311cf5c077",
+      "url": "https://github.com/tmux-plugins/tmux-pain-control/archive/32b760f6652f2305dfef0acd444afc311cf5c077.tar.gz",
+      "hash": "06rbr0n7pabi4wr7idpb2ri1r14gr2nmgbkq2y3x73ssng1kslnr"
+    },
+    "vim-copilot": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "github",
+        "repo": "copilot.vim"
+      },
+      "branch": "release",
+      "revision": "87038123804796ca7af20d1b71c3428d858a9124",
+      "url": "https://github.com/github/copilot.vim/archive/87038123804796ca7af20d1b71c3428d858a9124.tar.gz",
+      "hash": "1532h9694na7mx2lxmg0cx683df0x7w83vrrvd1gn5hwv96bhvpp"
+    },
+    "vim-cue": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jjo",
+        "repo": "vim-cue"
+      },
+      "branch": "master",
+      "revision": "bd1a62303d096aa24fe4160a475645087f8770b3",
+      "url": "https://github.com/jjo/vim-cue/archive/bd1a62303d096aa24fe4160a475645087f8770b3.tar.gz",
+      "hash": "01f89ki0w2j58pfdvb8w0sf1x5nqgqh3bldinifpd4pysnqhniai"
+    },
+    "vim-devicons": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "ryanoasis",
+        "repo": "vim-devicons"
+      },
+      "branch": "master",
+      "revision": "71f239af28b7214eebb60d4ea5bd040291fb7e33",
+      "url": "https://github.com/ryanoasis/vim-devicons/archive/71f239af28b7214eebb60d4ea5bd040291fb7e33.tar.gz",
+      "hash": "0kshppxgi63wn96a8h9zv7drwqcbljin5jhszh8q7pqw2xsd83gn"
+    },
+    "vim-dracula": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "dracula",
+        "repo": "vim"
+      },
+      "branch": "master",
+      "revision": "65f4225e0526516a67d56c8ac09925a209138e53",
+      "url": "https://github.com/dracula/vim/archive/65f4225e0526516a67d56c8ac09925a209138e53.tar.gz",
+      "hash": "0jp54l8k40mij0mkavsxzv2kipvzzvy211d6hyvq6ry9liqkl7b8"
+    },
+    "vim-fish": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "dag",
+        "repo": "vim-fish"
+      },
+      "branch": "master",
+      "revision": "50b95cbbcd09c046121367d49039710e9dc9c15f",
+      "url": "https://github.com/dag/vim-fish/archive/50b95cbbcd09c046121367d49039710e9dc9c15f.tar.gz",
+      "hash": "1yvjlm90alc4zsdsppkmsja33wsgm2q6kkn9dxn6xqwnq4jw5s7h"
+    },
+    "vim-fugitive": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tpope",
+        "repo": "vim-fugitive"
+      },
+      "branch": "master",
+      "revision": "320b18fba2a4f2fe3c8225c778c687e0d2620384",
+      "url": "https://github.com/tpope/vim-fugitive/archive/320b18fba2a4f2fe3c8225c778c687e0d2620384.tar.gz",
+      "hash": "1whwsz6sispx59pcqxv64890rb4gga35nd758kcm7f27md7vcr24"
+    },
+    "vim-glsl": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tikhomirov",
+        "repo": "vim-glsl"
+      },
+      "branch": "master",
+      "revision": "40dd0b143ef93f3930a8a409f60c1bb85e28b727",
+      "url": "https://github.com/tikhomirov/vim-glsl/archive/40dd0b143ef93f3930a8a409f60c1bb85e28b727.tar.gz",
+      "hash": "0m7c0z7f4zz4vnl0ls71grnish7m07kqz9n2jsrm6hsq5pjn36bp"
+    },
+    "vim-nord": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "crispgm",
+        "repo": "nord-vim"
+      },
+      "branch": "develop",
+      "revision": "befd6c1f0807694f6f7fd7bf0ddebcf4b66fbf3d",
+      "url": "https://github.com/crispgm/nord-vim/archive/befd6c1f0807694f6f7fd7bf0ddebcf4b66fbf3d.tar.gz",
+      "hash": "0ax1nnwmln4jwkdrk60vpxzhjnarajam8wlf8blfhm01npdmp2xz"
+    },
+    "vim-pgsql": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "lifepillar",
+        "repo": "pgsql.vim"
+      },
+      "branch": "master",
+      "revision": "736c9899163a7f4e212c1675d8a1fe42570a027a",
+      "url": "https://github.com/lifepillar/pgsql.vim/archive/736c9899163a7f4e212c1675d8a1fe42570a027a.tar.gz",
+      "hash": "0z79jpjncdfc1a6c2992g9q0qrsr90cpp1zh07nr8pzp9rqzgjsw"
+    },
+    "vim-pigeon": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "jasontbradshaw",
+        "repo": "pigeon.vim"
+      },
+      "branch": "master",
+      "revision": "a7f149c99b7259437032af45db57c53d4c41e68b",
+      "url": "https://github.com/jasontbradshaw/pigeon.vim/archive/a7f149c99b7259437032af45db57c53d4c41e68b.tar.gz",
+      "hash": "079krbw1z4bjwa7qfz33fwjy5h0fry0i2a02wnvqkrqnxmzq5dxs"
+    },
+    "vim-tla": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "hwayne",
+        "repo": "tla.vim"
+      },
+      "branch": "master",
+      "revision": "0d6d453a401542ce1db247c6fd139ac99b8a5add",
+      "url": "https://github.com/hwayne/tla.vim/archive/0d6d453a401542ce1db247c6fd139ac99b8a5add.tar.gz",
+      "hash": "1bfxnvx3g5679jan7v5prh7zk0f77m81g8c9ngq75nxdn20ihl7l"
+    },
+    "vim-zig": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "ziglang",
+        "repo": "zig.vim"
+      },
+      "branch": "master",
+      "revision": "15d6510b77a4efbb6ffcb151ed7e2ce4de4d06f6",
+      "url": "https://github.com/ziglang/zig.vim/archive/15d6510b77a4efbb6ffcb151ed7e2ce4de4d06f6.tar.gz",
+      "hash": "1f45d75df822djcsyxmg3v4ddh78nc1ii8mcwrjcwjqxlh6vm16y"
+    }
+  },
+  "version": 3
+}

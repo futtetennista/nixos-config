@@ -1,7 +1,7 @@
 # Connectivity info for Linux VM
 NIXADDR ?= unset
 NIXPORT ?= 22
-NIXUSER ?= mitchellh
+NIXUSER ?= futtetennista
 
 # Get the path to this Makefile and directory
 MAKEFILE_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
@@ -24,12 +24,15 @@ else
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
 endif
 
+check:
+	$(MAKE) test
+
 test:
 ifeq ($(UNAME), Darwin)
-	nix build ".#darwinConfigurations.${NIXNAME}.system"
-	./result/sw/bin/darwin-rebuild test --flake "$$(pwd)#${NIXNAME}"
+	nix --extra-experimental-features nix-command --extra-experimental-features flakes build ".#darwinConfigurations.${NIXNAME}.system"
+	./result/sw/bin/darwin-rebuild check --flake "$$(pwd)#${NIXNAME}"
 else
-	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild test --flake ".#$(NIXNAME)"
+	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild check --flake ".#$(NIXNAME)"
 endif
 
 # This builds the given NixOS configuration and pushes the results to the
@@ -38,14 +41,14 @@ endif
 cache:
 	nix build '.#nixosConfigurations.$(NIXNAME).config.system.build.toplevel' --json \
 		| jq -r '.[].outputs | to_entries[].value' \
-		| cachix push mitchellh-nixos-config
+		| cachix push futtetennista-nixos-config
 
 # bootstrap a brand new VM. The VM should have NixOS ISO on the CD drive
 # and just set the password of the root user to "root". This will install
 # NixOS. After installing NixOS, you must reboot and set the root password
 # for the next step.
 #
-# NOTE(mitchellh): I'm sure there is a way to do this and bootstrap all
+# NOTE(futtetennista): I'm sure there is a way to do this and bootstrap all
 # in one step but when I tried to merge them I got errors. One day.
 vm/bootstrap0:
 	ssh $(SSH_OPTIONS) -p$(NIXPORT) root@$(NIXADDR) " \
@@ -66,8 +69,8 @@ vm/bootstrap0:
 		sed --in-place '/system\.stateVersion = .*/a \
 			nix.package = pkgs.nixUnstable;\n \
 			nix.extraOptions = \"experimental-features = nix-command flakes\";\n \
-			nix.settings.substituters = [\"https://mitchellh-nixos-config.cachix.org\"];\n \
-			nix.settings.trusted-public-keys = [\"mitchellh-nixos-config.cachix.org-1:bjEbXJyLrL1HZZHBbO4QALnI5faYZppzkU4D2s0G8RQ=\"];\n \
+			nix.settings.substituters = [\"https://futtetennista-nixos-config.cachix.org\"];\n \
+			nix.settings.trusted-public-keys = [\"futtetennista-nixos-config.cachix.org-1:ExARQbiFNQCugALmrVDIgAn/jMbhhEHuZkKXF7W7C1E=\"];\n \
   			services.openssh.enable = true;\n \
 			services.openssh.settings.PasswordAuthentication = true;\n \
 			services.openssh.settings.PermitRootLogin = \"yes\";\n \
