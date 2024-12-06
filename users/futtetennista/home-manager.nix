@@ -193,7 +193,7 @@ in {
     userName = "Stefano";
     userEmail = "futtetennista@gmail.com";
     signing = {
-      key = "XXXXXXXXXXXXXXXX";
+      key = "E6E59763833311C9";
       signByDefault = true;
     };
     aliases = {
