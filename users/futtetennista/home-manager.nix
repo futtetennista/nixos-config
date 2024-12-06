@@ -7,6 +7,25 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
 
+  sjurmillidahl.ormolu-vscode = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    nativeBuildInputs = with pkgs; [
+      jq
+      moreutils
+    ];
+
+    mktplcRef = {
+      name = "ormolu-vscode";
+      publisher = "sjurmillidahl";
+      version = "0.0.10";
+      hash = "sha256-FJvxD4UcuNzdFAeOSFlwtGn9WDqs0Zl1uEvnTcI7yo0=";
+    };
+
+    postInstall = ''
+      cd "$out/$installPrefix"
+      jq '.contributes.configuration.properties."ormolu.path".default = "${pkgs.ormolu}/bin/ormolu"' package.json | sponge package.json
+    '';
+  };
+
   # For our MANPAGER env var
   # https://github.com/sharkdp/bat/issues/1145
   manpager = (pkgs.writeShellScriptBin "manpager" (if isDarwin then ''
@@ -191,6 +210,57 @@ in {
   #   goPath = "code/go";
   #   goPrivate = [ "github.com/futtetennista" ];
   # };
+
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      # arcanis.vscode-zipfs
+      bbenoist.nix
+      bierner.markdown-mermaid
+      dbaeumer.vscode-eslint
+      eamodio.gitlens
+      esbenp.prettier-vscode
+      github.copilot
+      github.copilot-chat
+      github.vscode-github-actions
+      github.vscode-pull-request-github
+      # googlecloudtools.cloudcode
+      hashicorp.terraform
+      haskell.haskell
+      # jcanero.hoogle-vscode
+      justusadam.language-haskell
+      # lextudio.restructuredtext
+      # mathematic.vscode-pdf
+      mathiasfrohlich.kotlin
+      ms-azuretools.vscode-docker
+      ms-kubernetes-tools.vscode-kubernetes-tools
+      # ms-ossdata.vscode-postgresql
+      ms-python.debugpy
+      ms-python.isort
+      ms-python.python
+      ms-python.vscode-pylance
+      ms-toolsai.jupyter
+      ms-toolsai.jupyter-keymap
+      ms-toolsai.jupyter-renderers
+      ms-toolsai.vscode-jupyter-cell-tags
+      ms-toolsai.vscode-jupyter-slideshow
+      ms-vscode-remote.remote-containers
+      ms-vscode-remote.remote-ssh
+      ms-vscode-remote.remote-ssh-edit
+      ms-vscode.live-server
+      ms-vscode.makefile-tools
+      # ms-vscode.remote-explorer
+      redhat.vscode-yaml
+      reditorsupport.r
+      # runem.lit-plugin
+      scala-lang.scala
+      scalameta.metals
+      sjurmillidahl.ormolu-vscode
+      # trond-snekvik.simple-rst
+      # visortelle.haskell-spotlight
+      vscodevim.vim
+    ];
+  };
 
   programs.tmux = {
     enable = true;
