@@ -33,33 +33,12 @@
 
     # Other packages
     # jujutsu.url = "github:martinvonz/jj";
-    # zig.url = "github:futtetennista/zig-overlay";
+    # zig.url = "github:mitchellh/zig-overlay";
+    ormolu.url = "github:tweag/ormolu";
 
     # Non-flakes
-    # nvim-conform.url = "github:stevearc/conform.nvim/v7.1.0";
-    # nvim-conform.flake = false;
-    # nvim-dressing.url = "github:stevearc/dressing.nvim";
-    # nvim-dressing.flake = false;
-    # nvim-gitsigns.url = "github:lewis6991/gitsigns.nvim/v0.9.0";
-    # nvim-gitsigns.flake = false;
-    # nvim-lspconfig.url = "github:neovim/nvim-lspconfig";
-    # nvim-lspconfig.flake = false;
-    # nvim-lualine.url ="github:nvim-lualine/lualine.nvim";
-    # nvim-lualine.flake = false;
-    # nvim-nui.url = "github:MunifTanjim/nui.nvim";
-    # nvim-nui.flake = false;
-    # nvim-plenary.url = "github:nvim-lua/plenary.nvim";
-    # nvim-plenary.flake = false;
-    # nvim-telescope.url = "github:nvim-telescope/telescope.nvim/0.1.8";
-    # nvim-telescope.flake = false;
-    # nvim-treesitter.url = "github:nvim-treesitter/nvim-treesitter/v0.9.2";
-    # nvim-treesitter.flake = false;
-    # nvim-web-devicons.url = "github:nvim-tree/nvim-web-devicons";
-    # nvim-web-devicons.flake = false;
-    # vim-copilot.url = "github:github/copilot.vim/v1.41.0";
-    # vim-copilot.flake = false;
-    # vim-misc.url = "github:futtetennista/vim-misc";
-    # vim-misc.flake = false;
+    # name.url = "github:user/repo/ref0";
+    # name.flake = false;
   };
 
   outputs = { self, nixpkgs, home-manager, nix-darwin, ... }@inputs: let
