@@ -42,6 +42,21 @@
       "url": "https://github.com/tmux-plugins/tmux-pain-control/archive/32b760f6652f2305dfef0acd444afc311cf5c077.tar.gz",
       "hash": "06rbr0n7pabi4wr7idpb2ri1r14gr2nmgbkq2y3x73ssng1kslnr"
     },
+    "tpm": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tmux-plugins",
+        "repo": "tpm"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v3.1.0",
+      "revision": "c628645dfa7c4fc16acfb7a73c9d7a98697b472c",
+      "url": "https://api.github.com/repos/tmux-plugins/tpm/tarball/v3.1.0",
+      "hash": "18i499hhxly1r2bnqp9wssh0p1v391cxf10aydxaa7mdmrd3vqh9"
+    },
     "vim-copilot": {
       "type": "Git",
       "repository": {
