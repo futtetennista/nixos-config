@@ -216,20 +216,179 @@ in {
       color.ui = true;
       core.askPass = ""; # needs to be empty to use terminal for ask pass
       credential.helper = "store"; # want to make this more secure
-      github.user = "@@github.user@@";
-      push.default = "tracking";
+      github.user = "futtetennista";
       init.defaultBranch = "main";
+      push.authSetupRemote = true;
+      push.default = "tracking";
+      rebase.autoStash = true;
     };
   };
 
   # programs.go = {
   #   enable = true;
   #   goPath = "code/go";
-  #   goPrivate = [ "github.com/@@github.user@@" ];
+  #   goPrivate = [ "github.com/futtetennista" ];
   # };
 
   programs.vscode = {
     enable = true;
+    userSettings = {
+      "cloudcode.apigee.dockerOptions" = {
+        "environmentVariables" = {
+          "XTERM" = "xterm-256color";
+        };
+        "dns" = "8.8.8.8";
+        "detached" = true;
+        "privileged" = true;
+        "labels" = {};
+        "volumes" = {};
+        "additionalArguments" = "";
+      };
+      "debug.javascript.autoAttachFilter" = "disabled";
+      "diffEditor.ignoreTrimWhitespace" = false;
+      "editor.renderWhitespace" = "all";
+      "editor.minimap.enabled" = false;
+      "editor.formatOnSave" = false;
+      "editor.codeActionsOnSave" = {
+        "source.fixAll.eslint" = "explicit";
+        # "source.organizeImports" = "explicit";
+      };
+      "editor.tabSize" = 2;
+      "eslint.codeActionsOnSave.mode" = "problems";
+      # "eslint.enable" = true;
+      # "eslint.format.enable" = true;
+      # "eslint.validate" = [
+      #   "javascript"
+      #   "javascriptreact"
+      #   "typescript"
+      #   "typescriptreact"
+      # ];
+      "explorer.confirmDragAndDrop" = false;
+      "files.associations" = {
+        "*.libjsonnet" = "jsonnet";
+        "*.jsonnet" = "jsonnet";
+        "*.json" = "json";
+      };
+      "files.watcherExclude" = {
+        "**/.bloop" = true;
+        "**/.metals" = true;
+        "**/.ammonite" = true;
+      };
+      "files.insertFinalNewline" = true;
+      "files.trimTrailingWhitespace" = true;
+      "git.ignoreMissingGitWarning" = true;
+      "haskell.manageHLS" = "GHCup";
+      # "metals.javaHome" = "~/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.15%252B10/OpenJDK11U-jdk_x64_mac_hotspot_11.0.15_10.tar.gz/jdk-11.0.15+10/Contents/Home";
+      "notebook.lineNumbers" = "on";
+      "json.schemas" = [];
+      "plantuml.server" = "http://localhost:9090";
+      "plantuml.render" = "PlantUMLServer";
+      "prettier.trailingComma" = "all";
+      "python.defaultInterpreterPath" = "${pkgs.python312}/bin/python3";
+      "python.analysis.typeCheckingMode" = "strict";
+      "python.formatting.provider" = "autopep8";
+      "redhat.telemetry.enabled" = false;
+      "terminal.integrated.defaultProfile.windows" = "";
+      "terminal.integrated.inheritEnv" = false;
+      "typescript.preferences.importModuleSpecifier" = "non-relative";
+      # "vs-kubernetes" = {
+      #   "vscode-kubernetes.minikube-path.mac" = "~/.vs-kubernetes/tools/minikube/darwin-amd64/minikube";
+      # };
+      "window.autoDetectColorScheme" = true;
+      "window.confirmBeforeClose" = "keyboardOnly";
+      "[dockercompose]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+      "[dockerfile]" = {
+        "editor.defaultFormatter" = "ms-azuretools.vscode-docker";
+      };
+      "[go]" = {
+        "editor.insertSpaces" = false;
+        "editor.formatOnSave" = true;
+        "editor.codeActionsOnSave" = {
+          "source.organizeImports" = "explicit";
+        };
+        "editor.suggest.snippetsPreventQuickSuggestions" = false;
+      };
+      "[haskell]" = {
+        "editor.formatOnSave" = true;
+        "editor.tabSize" = 2;
+        "editor.defaultFormatter" = "sjurmillidahl.ormolu-vscode";
+      };
+      "[jinja-shell]" = {
+        "editor.formatOnSave" = false;
+      };
+      "[javascript]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        "editor.formatOnSave" = true;
+      };
+      "[json]" = {
+        "editor.tabSize" = 2;
+        "editor.defaultFormatter" = "vscode.json-language-features";
+        "editor.formatOnSave" = true;
+      };
+      "[jsonc]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        "editor.formatOnSave" = true;
+      };
+      "[jsonnet]" = {
+        "editor.defaultFormatter" = "Sebbia.jsonnetng";
+      };
+      "[mermaid]" = {
+        "editor.formatOnSave" = false;
+      };
+      "[nix]" = {
+        "editor.autoIndent" = "full";
+      };
+      "[plantuml]" = {
+        "editor.tabSize" = 2;
+      };
+      "[python]" = {
+        "editor.formatOnSave" = true;
+        "editor.wordBasedSuggestions" = "matchingDocuments";
+        "editor.tabSize" = 4;
+      };
+      "[r]" = {
+        "editor.defaultFormatter" = "Ikuyadeu.r";
+        "editor.formatOnSave" = true;
+        "editor.wordSeparators" = "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?";
+      };
+      "[rmd]" = {
+        "editor.defaultFormatter" = "Ikuyadeu.r";
+        "editor.formatOnSave" = true;
+      };
+      "[scala]" = {
+        "editor.suggestSelection" = "first";
+        "editor.formatOnPaste" = true;
+        "editor.formatOnType" = true;
+        "editor.tabSize" = 2;
+      };
+      "[typescript]" = {
+        "editor.formatOnSave" = true;
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        "editor.tabSize" = 2;
+      };
+      "[typescriptreact]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        "editor.formatOnSave" = true;
+      };
+      "[xml]" = {
+        "editor.autoClosingBrackets" = "never";
+        "editor.formatOnSave" = false;
+        "editor.tabSize" = 2;
+        "files.trimFinalNewlines" = true;
+      };
+      "[yaml]" = {
+        "editor.insertSpaces" = true;
+        "editor.tabSize" = 2;
+        "editor.autoIndent" = "advanced";
+        "diffEditor.ignoreTrimWhitespace" = false;
+        "gitlens.codeLens.scopes" = [
+          "document"
+        ];
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+    };
     extensions = with pkgs.vscode-extensions; [
       # arcanis.vscode-zipfs
       # googlecloudtools.cloudcode
