@@ -14,12 +14,14 @@ UNAME := $(shell uname)
 
 switch:
 ifeq ($(UNAME), Darwin)
-	./replace_secrets.sh
+	./replace_secrets.sh /tmp/replace_secrets.diff
 	nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.${NIXNAME}.system"
 	./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXNAME}"
+	git apply -R /tmp/replace_secrets.diff
 else
-	./replace_secrets.sh
+	./replace_secrets.sh /tmp/replace_secrets.diff
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
+	git apply -R /tmp/replace_secrets.diff
 endif
 
 check:
@@ -27,22 +29,25 @@ check:
 
 test:
 ifeq ($(UNAME), Darwin)
-	./replace_secrets.sh
+	./replace_secrets.sh /tmp/replace_secrets.diff
 	nix --extra-experimental-features nix-command --extra-experimental-features flakes build ".#darwinConfigurations.${NIXNAME}.system"
 	./result/sw/bin/darwin-rebuild check --flake "$$(pwd)#${NIXNAME}"
+	git apply -R /tmp/replace_secrets.diff
 else
-	./replace_secrets.sh
-	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild check --flake ".#$(NIXNAME)"
+	./replace_secrets.sh /tmp/replace_secrets.diff
+	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild check --flake ".#${NIXNAME}"
+	git apply -R /tmp/replace_secrets.diff
 endif
 
 # This builds the given NixOS configuration and pushes the results to the
 # cache. This does not alter the current running system. This requires
 # cachix authentication to be configured out of band.
 cache:
-	./replace_secrets.sh
-	nix build '.#nixosConfigurations.$(NIXNAME).config.system.build.toplevel' --json \
+	./replace_secrets.sh /tmp/replace_secrets.diff
+	nix build '.#nixosConfigurations.${NIXNAME}.config.system.build.toplevel' --json \
 		| jq -r '.[].outputs | to_entries[].value' \
-		| cachix push $(NIXCACHE)
+		| cachix push ${NIXCACHE}
+	git apply -R /tmp/replace_secrets.diff
 
 # bootstrap a brand new VM. The VM should have NixOS ISO on the CD drive
 # and just set the password of the root user to "root". This will install
@@ -70,8 +75,8 @@ vm/bootstrap0:
 		sed --in-place '/system\.stateVersion = .*/a \
 			nix.package = pkgs.nixUnstable;\n \
 			nix.extraOptions = \"experimental-features = nix-command flakes\";\n \
-			nix.settings.extra-substituters = [$(NIXCACHE_URL)];\n \
-			nix.settings.extra-trusted-public-keys = [$(NIXCACHE_PUBLIC_KEY)];\n \
+			nix.settings.extra-substituters = [${NIXCACHE_URL}];\n \
+			nix.settings.extra-trusted-public-keys = [${NIXCACHE_PUBLIC_KEY}];\n \
   		services.openssh.enable = true;\n \
 			services.openssh.settings.PasswordAuthentication = true;\n \
 			services.openssh.settings.PermitRootLogin = \"yes\";\n \
@@ -86,7 +91,7 @@ vm/bootstrap:
 	NIXUSER=root $(MAKE) vm/copy
 	NIXUSER=root $(MAKE) vm/switch
 	$(MAKE) vm/secrets
-	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
+	ssh $(SSH_OPTIONS) -p$(NIXPORT) ${NIXUSER}@$(NIXADDR) " \
 		sudo reboot; \
 	"
 
@@ -97,11 +102,11 @@ vm/secrets:
 		--exclude='.#*' \
 		--exclude='S.*' \
 		--exclude='*.conf' \
-		$(HOME)/.gnupg/ $(NIXUSER)@$(NIXADDR):~/.gnupg
+		$(HOME)/.gnupg/ ${NIXUSER}@$(NIXADDR):~/.gnupg
 	# SSH keys
 	rsync -av -e 'ssh $(SSH_OPTIONS)' \
 		--exclude='environment' \
-		$(HOME)/.ssh/ $(NIXUSER)@$(NIXADDR):~/.ssh
+		$(HOME)/.ssh/ ${NIXUSER}@$(NIXADDR):~/.ssh
 
 # copy the Nix configurations into the VM.
 vm/copy:
@@ -111,12 +116,12 @@ vm/copy:
 		--exclude='.git-crypt/' \
 		--exclude='iso/' \
 		--rsync-path="sudo rsync" \
-		$(MAKEFILE_DIR)/ $(NIXUSER)@$(NIXADDR):/nix-config
+		$(MAKEFILE_DIR)/ ${NIXUSER}@$(NIXADDR):/nix-config
 
 # run the nixos-rebuild switch command. This does NOT copy files so you
 # have to run vm/copy before.
 vm/switch:
-	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
+	ssh $(SSH_OPTIONS) -p$(NIXPORT) ${NIXUSER}@$(NIXADDR) " \
 		sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake \"/nix-config#${NIXNAME}\" \
 	"
 
