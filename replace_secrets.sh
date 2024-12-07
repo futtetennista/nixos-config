@@ -17,4 +17,6 @@ for key in "${keys[@]}"; do
   done
 done
 
+git diff -G '@@.*@@' -- ':(exclude)replace_secrets.sh' > "${1:=/tmp/replace_secrets.diff}"
+
 echo "[replace_secrets.sh] Secrets replaced successfully."
