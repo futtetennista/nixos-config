@@ -50,6 +50,7 @@
   environment.systemPackages = with pkgs; [
     cachix
     docker
+    npins
   ];
 
   system.defaults = {
