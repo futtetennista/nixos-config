@@ -51,6 +51,7 @@
     cachix
     docker
     npins
+    shellcheck
   ];
 
   system.defaults = {
