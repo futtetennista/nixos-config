@@ -15,12 +15,13 @@ let
   # True if this is a WSL system.
   isWSL = wsl;
 
+  currentSystemUser = user;
+
   # The config files for this system.
+  # Take the substring "macbook-pro" from e.g. "macbook-pro-intel"
   machineConfig = ../machines/${if darwin then builtins.substring 0 11 name else name}.nix;
-  # If darwin, split the name on "-" and take the first two elements, then join on "-"
-  # Use 'darwin.nix' or 'nixos.nix' depending on the current platform
-  userOSConfig = ../users/${user}/${if darwin then "darwin" else "nixos" }.nix;
-  userHMConfig = ../users/${user}/home-manager.nix;
+  userOSConfig = ../users/template/${if darwin then "darwin.nix" else "nixos.nix" };
+  userHMConfig = ../users/template/home-manager.nix;
 
   # NixOS vs nix-darwin functionst
   systemFunc = if darwin then inputs.nix-darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
@@ -46,9 +47,8 @@ in systemFunc rec {
       home-manager.backupFileExtension = "home-manager-backup";
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.${user} = import userHMConfig {
-        isWSL = isWSL;
-        inputs = inputs;
+      home-manager.users.${currentSystemUser} = import userHMConfig {
+        inherit isWSL inputs currentSystemUser;
       };
     }
 
@@ -56,12 +56,10 @@ in systemFunc rec {
     # better based on these values.
     {
       config._module.args = {
+        inherit isWSL inputs currentSystemUser;
         currentSystem = system;
         currentSystemName = name;
         currentSystemVersion = if darwin then (if version != "" then version else "Sequoia15") else "";
-        currentSystemUser = user;
-        isWSL = isWSL;
-        inputs = inputs;
       };
     }
   ];

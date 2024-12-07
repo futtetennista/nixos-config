@@ -1,4 +1,4 @@
-{ config, pkgs, lib, currentSystem, currentSystemName,... }:
+{ config, pkgs, lib, currentSystem, currentSystemName, currentSystemUser, ... }:
 
 let
   # Turn this to true to use gnome instead of i3. This is a bit
@@ -21,8 +21,8 @@ in {
     # this, use your own, or toss it. Its typically safe to use a binary cache
     # since the data inside is checksummed.
     settings = {
-      substituters = ["https://futtetennista-nixos-config.cachix.org"];
-      trusted-public-keys = ["futtetennista-nixos-config.cachix.org-1:ExARQbiFNQCugALmrVDIgAn/jMbhhEHuZkKXF7W7C1E="];
+      extra-substituters = ["@@nixCache.url@@"];
+      extra-trusted-public-keys = ["@@nixCache.publicKey@@"];
     };
   };
 

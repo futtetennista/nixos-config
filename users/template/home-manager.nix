@@ -1,4 +1,4 @@
-{ isWSL, inputs, ... }:
+{ isWSL, inputs, currentSystemUser, ... }:
 
 { config, lib, pkgs, ... }:
 
@@ -179,9 +179,9 @@ in {
 
     config = {
       whitelist = {
-        prefix= [
-          "$HOME/code/go/src/github.com/futtetennista"
-        ];
+        # prefix= [
+        #   "$HOME/code/go/src/github.com/@@github.user@@"
+        # ];
 
         exact = ["$HOME/.envrc"];
       };
@@ -190,14 +190,14 @@ in {
 
   programs.git = {
     enable = true;
-    userName = "Stefano";
-    userEmail = "futtetennista@gmail.com";
+    userName = "@@programs.git.userName@@";
+    userEmail = "@@programs.git.userEmail@@";
     signing = {
-      key = "E6E59763833311C9";
+      key = "@@programs.git.signing.key@@";
       signByDefault = true;
     };
     aliases = {
-      cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 -r git branch -d";
+      cleanup = "!git branch --merged | grep  -v '\\*\\|main\\|develop' | xargs -n 1 -r git branch -d";
       prettylog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
       root = "rev-parse --show-toplevel";
     };
@@ -206,7 +206,7 @@ in {
       color.ui = true;
       core.askPass = ""; # needs to be empty to use terminal for ask pass
       credential.helper = "store"; # want to make this more secure
-      github.user = "futtetennista";
+      github.user = "@@github.user@@";
       push.default = "tracking";
       init.defaultBranch = "main";
     };
@@ -215,7 +215,7 @@ in {
   # programs.go = {
   #   enable = true;
   #   goPath = "code/go";
-  #   goPrivate = [ "github.com/futtetennista" ];
+  #   goPrivate = [ "github.com/@@github.user@@" ];
   # };
 
   programs.vscode = {
