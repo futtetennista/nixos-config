@@ -41,8 +41,6 @@ in {
   # to use the old state version.
   home.stateVersion = "18.09";
 
-  xdg.enable = true;
-
   #---------------------------------------------------------------------
   # Packages
   #---------------------------------------------------------------------
@@ -96,13 +94,15 @@ in {
     MANPAGER = "${manpager}/bin/manpager";
   };
 
-  # home.file = {
+  home.file = {
+    ".psqlrc".source = ./psqlrc;
   #   ".gdbinit".source = ./gdbinit;
   #   ".inputrc".source = ./inputrc;
-  # } // (if isDarwin then {
+  } // (if isDarwin then {
   #   "Library/Application Support/jj/config.toml".source = ./jujutsu.toml;
-  # } else {});
+  } else {});
 
+  # xdg.enable = true;
   # xdg.configFile = {
   #   "i3/config".text = builtins.readFile ./i3;
   #   "rofi/config.rasi".text = builtins.readFile ./rofi;
@@ -153,7 +153,6 @@ in {
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     # shellOptions = [];
-    # historyControl = [ "ignoredups" "ignorespace" ];
     # initExtra = builtins.readFile ./zshrc;
     oh-my-zsh = {
       enable = true;

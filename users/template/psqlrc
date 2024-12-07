@@ -1,0 +1,41 @@
+\encoding UTF8
+
+-- [user]@[host]:[port]/[db]['*' if we are in a transaction]['#' if we are root-like; '>' otherwise]
+\set PROMPT1 '%n@%M:%>/%/%x%# '
+
+-- Ensure second prompt is empty, to facilitate easier copying
+-- of multiline SQL statements from a psql session into other
+-- tools / text editors.
+\set PROMPT2 ''
+
+\set COMP_KEYWORD_CASE lower
+
+-- Make history ignore all lines entered that were preceded by spaces, and
+-- ignore any entries that matched the previous line entered.
+\set HISTCONTROL ignoreboth
+
+\set HISTFILE ~/.psql_history- :HOST - :DBNAME - :USER
+
+\set HISTSIZE 1000
+
+\set AUTOCOMMIT off
+
+\set --single-transaction
+
+-- In interactive transactions, allow recovery after errors within
+-- transactions. In non-interactive transactions - e.g. those in piped
+-- input - do not.
+\set ON_ERROR_ROLLBACK interactive
+
+-- \set ON_ERROR_STOP on
+
+-- \pset null '[NULL]'
+\pset null '¤'
+
+\pset linestyle unicode
+
+\pset border 2
+
+\timing
+
+-- \set intervalstyle to 'postgres_verbose'
