@@ -29,6 +29,23 @@ let
     '';
   };
 
+  #---------------------------------------------------------------------
+  # Tmux plugins not available in nixpkgs
+  #---------------------------------------------------------------------
+  tmux-themepack = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tmux-themepack";
+    version = "master";
+    src = pkgs.fetchFromGitHub {
+      owner = "jimeh";
+      repo = "tmux-themepack";
+      rev = "7c59902f64dcd7ea356e891274b21144d1ea5948";
+      sha256 = "sha256-c5EGBrKcrqHWTKpCEhxYfxPeERFrbTuDfcQhsUAbic4=";
+    };
+    postInstall = ''
+      sed -i -e 's|tmux |${pkgs.tmux}/bin/tmux |g' $target/themepack.tmux
+    '';
+  };
+
   # For our MANPAGER env var
   # https://github.com/sharkdp/bat/issues/1145
   manpager = (pkgs.writeShellScriptBin "manpager" (if isDarwin then ''
@@ -435,6 +452,15 @@ in {
     shortcut = "l";
     secureSocket = false;
     mouse = true;
+    plugins = [
+      pkgs.tmuxPlugins.continuum
+      pkgs.tmuxPlugins.pain-control
+      pkgs.tmuxPlugins.resurrect
+      pkgs.tmuxPlugins.sensible
+      pkgs.tmuxPlugins.sessionist
+      pkgs.tmuxPlugins.yank
+      tmux-themepack
+    ];
 
     extraConfig = ''
       set -ga terminal-overrides ",*256col*:Tc"
@@ -443,10 +469,33 @@ in {
       set -g @dracula-show-network false
       set -g @dracula-show-weather false
 
-      bind -n C-k send-keys "clear"\; send-keys "Enter"
+      set -g @themepack 'powerline/block/cyan'
 
-      run-shell ${sources.tmux-pain-control}/pain_control.tmux
-      run-shell ${sources.tmux-dracula}/dracula.tmux
+      bind -n C-k send-keys "clear"\; send-keys "Enter"
+      # Copy on ^M to system clipboard
+      # bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
+      # unbind [
+      # bind Escape copy-mode
+      # unbind p
+      # bind p paste-buffer
+      # bind-key -t vi-copy 'v' begin-selection
+      # bind-key -t vi-copy 'y' copy-selection
+
+      # set-option -g prefix C-a
+      set-option -g allow-rename off
+      set-option -g status-right '[#h###S:#I:#P]'
+
+      set-window-option -g mode-keys vi
+
+      # run-shell ${sources.tmux-pain-control}/pain_control.tmux
+      # run-shell ${sources.tmux-dracula}/dracula.tmux
+      run-shell ${pkgs.tmuxPlugins.pain-control}/pain_control.tmux
+      run-shell ${pkgs.tmuxPlugins.dracula}/dracula.tmux
+      run-shell ${tmux-themepack}/themepack.tmux
+
+      # See https://github.com/tmux-plugins/tpm?tab=readme-ov-file#installation
+      # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+      run-shell ${sources.tpm}/tpm
     '';
   };
 
