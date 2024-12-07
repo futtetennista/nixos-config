@@ -36,6 +36,19 @@ let
     '' else ''
     cat "$1" | col -bx | bat --language man --style plain
   ''));
+
+  shellAliases = {
+    gut = "git";
+    ga = "git add";
+    gc = "git commit";
+    gco = "git checkout";
+    gcp = "git cherry-pick";
+    gd = "git diff";
+    gl = "git prettylog";
+    gp = "git push";
+    gs = "git status";
+    gt = "git tag";
+  };
 in {
   # Home-manager 22.11 requires this be set. We never set it so we have
   # to use the old state version.
@@ -135,17 +148,7 @@ in {
     historyControl = [ "ignoredups" "ignorespace" ];
     initExtra = builtins.readFile ./bashrc;
 
-    shellAliases = {
-      ga = "git add";
-      gc = "git commit";
-      gco = "git checkout";
-      gcp = "git cherry-pick";
-      gd = "git diff";
-      gl = "git prettylog";
-      gp = "git push";
-      gs = "git status";
-      gt = "git tag";
-    };
+    inherit shellAliases;
   };
 
   programs.zsh = {
@@ -160,17 +163,7 @@ in {
       theme = "robbyrussell";
     };
 
-    shellAliases = {
-      ga = "git add";
-      gc = "git commit";
-      gco = "git checkout";
-      gcp = "git cherry-pick";
-      gd = "git diff";
-      gl = "git prettylog";
-      gp = "git push";
-      gs = "git status";
-      gt = "git tag";
-    };
+    inherit shellAliases;
   };
 
   programs.direnv = {
