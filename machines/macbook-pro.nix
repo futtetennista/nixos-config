@@ -1,4 +1,4 @@
-{ config, lib, pkgs, currentSystemVersion, ... }:
+{ config, lib, pkgs, currentSystemVersion, currentSystemUser, ... }:
 
 {
   # Set in Sept 2024 as part of the macOS Sequoia release.
@@ -30,8 +30,8 @@
     # this, use your own, or toss it. Its typically safe to use a binary cache
     # since the data inside is checksummed.
     settings = {
-      extra-substituters = ["https://futtetennista-nixos-config.cachix.org"];
-      extra-trusted-public-keys = ["futtetennista-nixos-config.cachix.org-1:ExARQbiFNQCugALmrVDIgAn/jMbhhEHuZkKXF7W7C1E="];
+      extra-substituters = ["@@nixCache.url@@"];
+      extra-trusted-public-keys = ["@@nixCache.publicKey@@"];
     };
   };
 

@@ -1,13 +1,9 @@
 # Connectivity info for Linux VM
 NIXADDR ?= unset
 NIXPORT ?= 22
-NIXUSER ?= futtetennista
 
 # Get the path to this Makefile and directory
 MAKEFILE_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
-
-# The name of the nixosConfiguration in the flake
-NIXNAME ?= vm-intel
 
 # SSH options that are used. These aren't meant to be overridden but are
 # reused a lot so we just store them up here.
@@ -18,9 +14,11 @@ UNAME := $(shell uname)
 
 switch:
 ifeq ($(UNAME), Darwin)
+	./replace_secrets.sh
 	nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.${NIXNAME}.system"
 	./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXNAME}"
 else
+	./replace_secrets.sh
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
 endif
 
@@ -29,9 +27,11 @@ check:
 
 test:
 ifeq ($(UNAME), Darwin)
+	./replace_secrets.sh
 	nix --extra-experimental-features nix-command --extra-experimental-features flakes build ".#darwinConfigurations.${NIXNAME}.system"
 	./result/sw/bin/darwin-rebuild check --flake "$$(pwd)#${NIXNAME}"
 else
+	./replace_secrets.sh
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild check --flake ".#$(NIXNAME)"
 endif
 
@@ -39,9 +39,10 @@ endif
 # cache. This does not alter the current running system. This requires
 # cachix authentication to be configured out of band.
 cache:
+	./replace_secrets.sh
 	nix build '.#nixosConfigurations.$(NIXNAME).config.system.build.toplevel' --json \
 		| jq -r '.[].outputs | to_entries[].value' \
-		| cachix push futtetennista-nixos-config
+		| cachix push $(NIXCACHE)
 
 # bootstrap a brand new VM. The VM should have NixOS ISO on the CD drive
 # and just set the password of the root user to "root". This will install
@@ -69,9 +70,9 @@ vm/bootstrap0:
 		sed --in-place '/system\.stateVersion = .*/a \
 			nix.package = pkgs.nixUnstable;\n \
 			nix.extraOptions = \"experimental-features = nix-command flakes\";\n \
-			nix.settings.substituters = [\"https://futtetennista-nixos-config.cachix.org\"];\n \
-			nix.settings.trusted-public-keys = [\"futtetennista-nixos-config.cachix.org-1:ExARQbiFNQCugALmrVDIgAn/jMbhhEHuZkKXF7W7C1E=\"];\n \
-  			services.openssh.enable = true;\n \
+			nix.settings.extra-substituters = [$(NIXCACHE_URL)];\n \
+			nix.settings.extra-trusted-public-keys = [$(NIXCACHE_PUBLIC_KEY)];\n \
+  		services.openssh.enable = true;\n \
 			services.openssh.settings.PasswordAuthentication = true;\n \
 			services.openssh.settings.PermitRootLogin = \"yes\";\n \
 			users.users.root.initialPassword = \"root\";\n \
