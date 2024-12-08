@@ -62,7 +62,7 @@ function gpg_encrypt_dir {
 
   local -r fileName=$1
   zip -r "$fileName".zip "$fileName"
-  gpg --cipher-algo AES256 --compress-algo zip -o "$fileName".gpg -c "$fileName".zip
+  gpg --cipher-algo AES256 --compress-algo zip -o "$fileName".zip.gpg -c "$fileName".zip
   rm "$fileName"
 
   unset u
