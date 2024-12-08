@@ -67,3 +67,9 @@ function gpg_encrypt_dir {
 
   unset u
 }
+
+function add_ssh_key {
+  /usr/bin/ssh-add --apple-use-keychain @@ssh-agent.key.path@@
+}
+
+add_ssh_key

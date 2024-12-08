@@ -172,6 +172,7 @@ in {
     enable = true;
     enableCompletion = true;
     # shellOptions = [];
+    # Called 4th
     initExtra = builtins.readFile ./zshrc;
     oh-my-zsh = {
       enable = true;
@@ -179,18 +180,19 @@ in {
       theme = "robbyrussell";
     };
     syntaxHighlighting.enable = true;
-    interactiveShellInit = '''
-      echo "Interactive shell init"
-      # ssh-add --apple-use-keychain @@ssh-agent.key.path@@
+    # Called 3rd
+    initExtraBeforeCompInit = ''
     '';
-    loginShellInit = '''
-      echo "Login shell init"
+    # Called 2nd
+    initExtraFirst = ''
     '';
-    shellInit = '''
-      echo "Shell init"
-      if [ -f @@env.path@@ ]; then
-        source @@env.path@@
-      fi
+    # Called 5th
+    loginExtra = ''
+    '';
+    logoutExtra = ''
+    '';
+    # Called 1st
+    profileExtra = ''
     '';
 
     inherit shellAliases;
@@ -519,10 +521,6 @@ in {
     # cache the keys forever so we don't get asked for a password
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
-  };
-
-  services.ssh-agent = {
-    enable = true;
   };
 
   xresources.extraConfig = builtins.readFile ./Xresources;
