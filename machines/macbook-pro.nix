@@ -53,7 +53,6 @@
     docker
     gh
     git
-    git-crypt
     jq
     npins
     pre-commit
