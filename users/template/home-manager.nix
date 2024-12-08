@@ -502,15 +502,13 @@ in {
 
       set-window-option -g mode-keys vi
 
-      # run-shell ${sources.tmux-pain-control}/pain_control.tmux
-      # run-shell ${sources.tmux-dracula}/dracula.tmux
       run-shell ${pkgs.tmuxPlugins.pain-control}/pain_control.tmux
       run-shell ${pkgs.tmuxPlugins.dracula}/dracula.tmux
       run-shell ${tmux-themepack}/themepack.tmux
 
       # See https://github.com/tmux-plugins/tpm?tab=readme-ov-file#installation
       # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-      run-shell ${sources.tpm}/tpm
+      # run-shell {tpm}/tpm
     '';
   };
 
