@@ -9,6 +9,61 @@ COLOR_BLUE="\033[0;34m"
 COLOR_PS_CLEAR="\033[0m"
 COLOR_SCREEN_ESC="\033k\033\134"
 
-ZSH_THEME="robbyrussell"
-plugins=(git)
-source $ZSH/oh-my-zsh.sh
+#---------------------------------------------------------------------------
+# Functions
+#---------------------------------------------------------------------------
+function ssh_kill_open_sessions {
+  ps aux | grep 'ssh -' | awk '{print $2}' | xargs sudo kill
+}
+
+function is_same_checksum {
+  set -u
+
+  expectedChecksum=$2
+  actualChecksum=$(openssl dgst -sha1 $1 | awk '{print $2}')
+
+  if [ $actualChecksum = $expectedChecksum ]; then
+    echo -e "${COLOR_GREEN}✅Checksums match${COLOR_PS_CLEAR}"
+    unset u
+    exit 0
+  else
+    echo -e "${COLOR_RED}❌Checksums don't match${COLOR_PS_CLEAR}"
+    unset u
+    exit 1
+  fi
+}
+
+function gpg_keys_list {
+  gpg --list-secret-keys --keyid-format LONG
+}
+
+function gpg_encrypt {
+  set -u
+
+  local -r fileName=$1
+  gpg --cipher-algo AES256 --compress-algo zip -o $fileName.gpg -c $fileName
+
+  unset u
+}
+
+function gpg_decrypt {
+  set -u
+
+  local -r fileNameEnc=$1
+  shift
+  local -r fileNameDec=$1
+  gpg --output $fileNameDec -d $fileNameEnc
+
+  unset u
+}
+
+function gpg_encrypt_dir {
+  set -u
+
+  local -r fileName=$1
+  zip -r "$fileName".zip "$fileName"
+  gpg --cipher-algo AES256 --compress-algo zip -o "$fileName".gpg -c "$fileName".zip
+  rm "$fileName"
+
+  unset u
+}

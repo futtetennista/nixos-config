@@ -171,14 +171,27 @@ in {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    syntaxHighlighting.enable = true;
     # shellOptions = [];
-    # initExtra = builtins.readFile ./zshrc;
+    initExtra = builtins.readFile ./zshrc;
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" ];
       theme = "robbyrussell";
     };
+    syntaxHighlighting.enable = true;
+    interactiveShellInit = '''
+      echo "Interactive shell init"
+      # ssh-add --apple-use-keychain @@ssh-agent.key.path@@
+    '';
+    loginShellInit = '''
+      echo "Login shell init"
+    '';
+    shellInit = '''
+      echo "Shell init"
+      if [ -f @@env.path@@ ]; then
+        source @@env.path@@
+      fi
+    '';
 
     inherit shellAliases;
   };
@@ -506,6 +519,10 @@ in {
     # cache the keys forever so we don't get asked for a password
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
+  };
+
+  services.ssh-agent = {
+    enable = true;
   };
 
   xresources.extraConfig = builtins.readFile ./Xresources;
