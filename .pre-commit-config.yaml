@@ -16,16 +16,18 @@ repos:
     rev: 3.0.0
     hooks:
       - id: shellcheck
+        name: check shell scripts
   - repo: local
     hooks:
       - id: nixos-config-test
-        name: nixos-config-test
-        entry: NIXNAME=macbook-pro-intel NIXUSER=futtetennista make test
+        name: test config
+        entry: make test-pre-commit
         files: "\\.nix$"
         language: system
         pass_filenames: true
         stages:
-          - commit
+          - manual
+          - pre-push
         types:
           - file
   # - entry: /nix/store/d4b80pdbakylf5czc94ll3gwshmb0mmk-nix-linter-0.2.0.4/bin/nix-linter
