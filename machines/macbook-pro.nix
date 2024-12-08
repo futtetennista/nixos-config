@@ -49,7 +49,12 @@
   environment.shells = with pkgs; [ bashInteractive zsh ];
   environment.systemPackages = with pkgs; [
     cachix
+    curl
     docker
+    gh
+    git
+    git-crypt
+    jq
     npins
     shellcheck
   ];
