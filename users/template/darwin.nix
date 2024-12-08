@@ -38,7 +38,7 @@
       "discord"
       "firefox"
       "google-chrome"
-      "nordvpn"
+      # "nordvpn"
       "openoffice"
       "raycast"
       "rectangle"
