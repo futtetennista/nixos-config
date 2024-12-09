@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "@@env@@": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "@@env.path@@": {
+      "type": "string"
+    },
+    "@@programs.git.userName@@": {
+      "type": "string"
+    },
+    "@@programs.git.userEmail@@": {
+      "type": "string",
+      "format": "email"
+    },
+    "@@programs.git.signing.key@@": {
+      "type": "string"
+    },
+    "@@github.user@@": {
+      "type": "string"
+    },
+    "@@nixCache.url@@": {
+      "type": "string",
+      "format": "uri"
+    },
+    "@@nixCache.publicKey@@": {
+      "type": "string"
+    },
+    "@@ssh-agent.key.path@@": {
+      "type": "string"
+    },
+    "@@system.user@@": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "@@env@@",
+    "@@env.path@@",
+    "@@programs.git.userName@@",
+    "@@programs.git.userEmail@@",
+    "@@programs.git.signing.key@@",
+    "@@github.user@@",
+    "@@nixCache.url@@",
+    "@@nixCache.publicKey@@",
+    "@@ssh-agent.key.path@@",
+    "@@system.user@@"
+  ]
+}
