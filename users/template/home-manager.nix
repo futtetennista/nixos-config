@@ -242,7 +242,7 @@ in {
       color.ui = true;
       core.askPass = ""; # needs to be empty to use terminal for ask pass
       credential.helper = "store"; # want to make this more secure
-      github.user = "futtetennista";
+      github.user = "@@github.user@@";
       init.defaultBranch = "main";
       push.authSetupRemote = true;
       push.default = "tracking";
@@ -253,7 +253,7 @@ in {
   # programs.go = {
   #   enable = true;
   #   goPath = "code/go";
-  #   goPrivate = [ "github.com/futtetennista" ];
+  #   goPrivate = [ "github.com/@@github.user@@" ];
   # };
 
   programs.vscode = {
