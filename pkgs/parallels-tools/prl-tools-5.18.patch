@@ -139,5 +139,3 @@ diff -puNr prl-tools-build/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c
 -	.set_page_dirty = __set_page_dirty_nobuffers,
 +	.dirty_folio    = filemap_dirty_folio,
  };
-
-
