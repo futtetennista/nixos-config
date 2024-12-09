@@ -42,14 +42,6 @@ else
 	git apply -R /tmp/replace_secrets.diff
 endif
 
-test-pre-commit:
-ifeq ($(UNAME), Darwin)
-	nix --extra-experimental-features nix-command --extra-experimental-features flakes build ".#darwinConfigurations.$(NIXNAME).system"
-	./result/sw/bin/darwin-rebuild check --flake "$$(pwd)#$(NIXNAME)"
-else
-	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild check --flake ".#$(NIXNAME)"
-endif
-
 # This builds the given NixOS configuration and pushes the results to the
 # cache. This does not alter the current running system. This requires
 # cachix authentication to be configured out of band.
