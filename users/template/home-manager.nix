@@ -117,12 +117,13 @@ in {
   #---------------------------------------------------------------------
 
   home.sessionVariables = {
-    LANG = "en_US.UTF-8";
-    LC_CTYPE = "en_US.UTF-8";
-    LC_ALL = "en_US.UTF-8";
     EDITOR = "vim";
-    PAGER = "less -FirSwX";
+    HOMEBREW_AUTO_UPDATE_SECS = 604800; # One week
+    LANG = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
+    LC_CTYPE = "en_US.UTF-8";
     MANPAGER = "${manpager}/bin/manpager";
+    PAGER = "less -FirSwX";
   } // (builtins.fromJSON (builtins.readFile ../../secret/config.json)).environment_variables;
 
   home.file = {
