@@ -36,6 +36,10 @@ TODO
 
 ## Setup (macOS/Darwin)
 
+**WARNING: Don't do this without reading the source.** This repository
+is and always has been _my_ configurations. If you blindly run this,
+your system may be changed in ways that you don't want.
+
 This uses the [nix-darwin](https://github.com/LnL7/nix-darwin) project.
 I manage as much as I can with Nix, e.g. apps, system settings,
 Homebrew, etc. The configuration doesn't yet cover 100% of my set up though.
@@ -49,7 +53,3 @@ for my configs is just to get the `nix` CLI with flake support installed.
 Once installed, clone this repo and run `make`. If there are any errors,
 follow the error message (some folders may need permissions changed,
 some files may need to be deleted). That's it.
-
-**WARNING: Don't do this without reading the source.** This repository
-is and always has been _my_ configurations. If you blindly run this,
-your system may be changed in ways that you don't want.
