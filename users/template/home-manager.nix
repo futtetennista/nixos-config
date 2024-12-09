@@ -123,7 +123,7 @@ in {
     EDITOR = "vim";
     PAGER = "less -FirSwX";
     MANPAGER = "${manpager}/bin/manpager";
-  };
+  } // (builtins.fromJSON (builtins.readFile ../../secret/config.json)).environment_variables;
 
   home.file = {
     ".psqlrc".source = ./psqlrc;
