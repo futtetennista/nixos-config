@@ -20,9 +20,13 @@ repos:
   - repo: https://github.com/python-jsonschema/check-jsonschema
     rev: 0.30.0
     hooks:
+      - id: check-github-actions
+        name: check github actions
+      - id: check-github-workflows
+        name: check github actions workflows
       - id: check-jsonschema
+        name: check config.json schema
         entry: check-jsonschema
-        name: check-secret-config-jsonschema
         files: 'secret/config.json'
         args:
           - --schemafile
