@@ -38,7 +38,7 @@
       "alfred"
       "anki"
       # "cleanshot"
-      "calibre@6.29"
+      # "calibre@6.29"
       "discord"
       {
         name = "firefox";
@@ -76,7 +76,7 @@
     };
 
     onActivation = {
-      autoUpdate = false;
+      autoUpdate = true;
       extraFlags = [
         "--verbose"
       ];
