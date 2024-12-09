@@ -21,7 +21,7 @@ repos:
     hooks:
       - id: nixos-config-test
         name: test config
-        entry: make test-pre-commit
+        entry: make test
         files: "\\.nix$"
         language: system
         pass_filenames: true
