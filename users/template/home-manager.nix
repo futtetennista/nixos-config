@@ -350,7 +350,7 @@ in {
       };
       "[json]" = {
         "editor.tabSize" = 2;
-        "editor.defaultFormatter" = "vscode.json-language-features";
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
         "editor.formatOnSave" = true;
       };
       "[jsonc]" = {
