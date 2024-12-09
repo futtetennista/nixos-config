@@ -56,6 +56,7 @@ let
 
   shellAliases = {
     gut = "git";
+    gti = "git";
     ga = "git add";
     gc = "git commit";
     gco = "git checkout";
@@ -171,7 +172,6 @@ in {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    # shellOptions = [];
     # Called 4th
     initExtra = builtins.readFile ./zshrc;
     oh-my-zsh = {
@@ -231,6 +231,7 @@ in {
       undo = "reset HEAD~";
       zip = "archive --format=zip --output project.zip HEAD";
       cleanup = "!git branch --merged | grep  -v '\\*\\|main\\|develop' | xargs -n 1 -r git branch -d";
+      # Invoke it like this: git h -- <file>
       h = "log -p --follow";
       prettylog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
       root = "rev-parse --show-toplevel";
