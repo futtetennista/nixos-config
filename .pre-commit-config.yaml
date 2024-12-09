@@ -26,7 +26,8 @@ repos:
         language: system
         pass_filenames: true
         stages:
-          - push
+          - manual
+          - pre-push
         types:
           - file
   # - entry: /nix/store/d4b80pdbakylf5czc94ll3gwshmb0mmk-nix-linter-0.2.0.4/bin/nix-linter
