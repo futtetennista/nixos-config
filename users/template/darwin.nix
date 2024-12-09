@@ -31,21 +31,57 @@
   homebrew = {
     enable = true;
     casks  = [
-      "1password"
+      {
+        name = "1password";
+        args = { require_sha = true; };
+      }
       "alfred"
       "anki"
       # "cleanshot"
+      "calibre@6.29"
       "discord"
-      "firefox"
-      "google-chrome"
-      # "nordvpn"
-      "openoffice"
+      {
+        name = "firefox";
+        args = { require_sha = true; };
+      }
+      "flux"
+      {
+        name = "google-chrome";
+        args = { require_sha = true; };
+      }
+      {
+        name = "openoffice";
+        args = { require_sha = true; };
+      }
       "raycast"
       "rectangle"
-      "slack"
+      {
+        name = "slack";
+        args = { require_sha = true; };
+      }
       "spotify"
-      "visual-studio-code"
+      {
+        name = "visual-studio-code";
+        args = { require_sha = true; };
+      }
+      "zoom"
     ];
+
+    masApps = {
+      Bear = 1091189122;
+      Kindle = 302584613;
+      # Install it through the Mac App Store because the Homebrew version wasn't working correctly.
+      NordVPN = 905953485;
+      XCode = 497799835;
+    };
+
+    onActivation = {
+      autoUpdate = false;
+      extraFlags = [
+        "--verbose"
+      ];
+      upgrade = false;
+    };
   };
 
   # The user should already exist, but we need to set this up so Nix knows
