@@ -197,7 +197,17 @@ in {
       signByDefault = true;
     };
     aliases = {
+      amend = "commit --amend";
+      cm = "commit -m";
+      co = "checkout";
+      po = "push origin";
+      pr = "pull -r -p";
+      s = "status";
+      size = "count-objects -vH";
+      undo = "reset HEAD~";
+      zip = "archive --format=zip --output project.zip HEAD";
       cleanup = "!git branch --merged | grep  -v '\\*\\|main\\|develop' | xargs -n 1 -r git branch -d";
+      h = "log -p --follow";
       prettylog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
       root = "rev-parse --show-toplevel";
     };
