@@ -134,6 +134,12 @@ in {
   #   "Library/Application Support/jj/config.toml".source = ./jujutsu.toml;
   } else {});
 
+  xdg = {
+    enable = true;
+    configFile = (if isDarwin then {
+      "rectangle/RectangleConfig.json".text = builtins.readFile ./RectangleConfig.json;
+    } else {});
+  };
   # xdg.enable = true;
   # xdg.configFile = {
   #   "i3/config".text = builtins.readFile ./i3;
