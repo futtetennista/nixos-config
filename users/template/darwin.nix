@@ -29,6 +29,9 @@
   ];
 
   homebrew = {
+    brews = [
+      "gnupg"
+    ];
     enable = true;
     casks  = [
       {
