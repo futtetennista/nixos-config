@@ -217,6 +217,10 @@ in {
     enable = true;
     userName = "@@programs.git.userName@@";
     userEmail = "@@programs.git.userEmail@@";
+    signing = {
+      key = "@@programs.git.signing.key@@";
+      signByDefault = true;
+    };
     aliases = {
       amend = "commit --amend";
       cm = "commit -m";
@@ -243,8 +247,8 @@ in {
       push.authSetupRemote = true;
       push.default = "tracking";
       rebase.autoStash = true;
-      gpg.format = "ssh";
-      user.signingkey = "@@ssh.key.path@@.pub";
+      # gpg.format = "ssh";
+      # user.signingkey = "@@ssh.key.path@@.pub";
     };
   };
 

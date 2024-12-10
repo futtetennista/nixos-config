@@ -10,6 +10,9 @@
     "@@env.path@@": {
       "type": "string"
     },
+    "@@programs.git.signing.key@@": {
+      "type": "string"
+    },
     "@@programs.git.userName@@": {
       "type": "string"
     },
@@ -36,6 +39,7 @@
   },
   "required": [
     "environment_variables",
+    "@@programs.git.signing.key@@",
     "@@programs.git.userName@@",
     "@@programs.git.userEmail@@",
     "@@github.user@@",
