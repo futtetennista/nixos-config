@@ -35,6 +35,10 @@
         name = "1password";
         args = { require_sha = true; };
       }
+      {
+        name = "appcleaner";
+        args = { require_sha = true; };
+      }
       # "alfred"
       "anki"
       # "cleanshot"
