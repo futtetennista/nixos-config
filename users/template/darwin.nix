@@ -21,42 +21,6 @@
           StartInterval = 604800;
         };
       };
-      # nordvpn = {
-      #   serviceConfig = {
-      #     Label = "application.com.nordvpn.NordVPN";
-      #     ProgramArguments = [ "/Applications/NordVPN.app/Contents/MacOS/NordVPN" ];
-      #     LimitLoadToSessionType = "Aqua";
-      #     OnDemand = true;
-      #     KeepAlive = true;
-      #     RunAtLoad = true;
-      #     StandardOutPath = "/tmp/com.nordvpn.NordVPN.log";
-      #     StandardErrorPath = "/tmp/com.nordvpn.NordVPN.error.log";
-      #   };
-      # };
-      # raycast = {
-      #   serviceConfig = {
-      #     Label = "application.com.raycast.macos";
-      #     ProgramArguments = [ "/Applications/Raycast.app/Contents/MacOS/Raycast" ];
-      #     LimitLoadToSessionType = "Aqua";
-      #     OnDemand = true;
-      #     KeepAlive = true;
-      #     RunAtLoad = true;
-      #     StandardOutPath = "/tmp/raycast.log";
-      #     StandardErrorPath = "/tmp/raycast.error.log";
-      #   };
-      # };
-      # rectangle = {
-      #   serviceConfig = {
-      #     Label = "application.com.knollsoft.Rectangle";
-      #     ProgramArguments = [ "/Applications/Rectangle.app/Contents/MacOS/Rectangle" ];
-      #     LimitLoadToSessionType = "Aqua";
-      #     OnDemand = true;
-      #     KeepAlive = true;
-      #     RunAtLoad = true;
-      #     StandardOutPath = "/tmp/com.knollsoft.Rectangle.log";
-      #     StandardErrorPath = "/tmp/rcom.knollsoft.Rectangle.error.log";
-      #   };
-      # };
     };
   };
 
