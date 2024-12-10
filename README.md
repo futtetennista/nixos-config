@@ -52,12 +52,20 @@ for my configs is just to get the `nix` CLI with flake support installed.
 
 Then install Homebrew, see the Homebrew website for installation instructions.
 
-Then either create a `secret/config.json` (look at its [JSON schema](config.schema.json))
-or copy it from another machine. The `secret/config.json` file in this repository
-is encrypted, so it's unlikely that you'll be able to see it in clear text.
-You could generate a suitable GPG key, but GPG is not installed by default
-on macOS. So you'd have to install it manually or wth Homebrew instead of being
-installed for you. Your choice.
+To be able to decrypt `secret/config.json` first run
+
+```bash
+$ git-crypt export-key <key>
+```
+
+in the "old" machine. Share that key so that it's available in the
+"new" machine and then run
+
+```bash
+$ git-crypt unlock <key>
+```
+
+in the "new" machine.
 
 Finally, clone this repo and run `make`. Provide the `NIXNAME` and
 `NIXUSER` if the default values don't suit you. If there are any errors,

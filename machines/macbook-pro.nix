@@ -75,6 +75,10 @@
       TrackpadThreeFingerDrag = true;
     };
 
+    # To get these values I run:
+    # $ defaults read
+    # on a machine that was already set up
+    # and then I manually "nix-ified" the values.
     CustomUserPreferences = {
       NSGlobalDomain = {
         # Enable standard function keys (F1, F2, etc.)
