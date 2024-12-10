@@ -35,7 +35,7 @@
         name = "1password";
         args = { require_sha = true; };
       }
-      "alfred"
+      # "alfred"
       "anki"
       # "cleanshot"
       # "calibre@6.29"
@@ -51,8 +51,14 @@
         name = "openoffice";
         args = { require_sha = true; };
       }
-      "raycast"
-      "rectangle"
+      {
+        name = "raycast";
+        args = { require_sha = true; };
+      }
+      {
+        name = "rectangle";
+        args = { require_sha = true; };
+      }
       {
         name = "slack";
         args = { require_sha = true; };
