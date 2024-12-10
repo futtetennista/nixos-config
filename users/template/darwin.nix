@@ -50,6 +50,10 @@
         args = { require_sha = true; };
       }
       {
+        name = "gnupg";
+        args = { require_sha = true; };
+      }
+      {
         name = "openoffice";
         args = { require_sha = true; };
       }
