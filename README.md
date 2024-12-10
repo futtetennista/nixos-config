@@ -50,6 +50,17 @@ There are two great installers right now:
 by Determinate Systems and [Flox](https://floxdev.com/). The point of both
 for my configs is just to get the `nix` CLI with flake support installed.
 
-Once installed, clone this repo and run `make`. If there are any errors,
+Then install Homebrew, see the Homebrew website for installation instructions.
+
+Then either create a `secret/config.json` (look at its [JSON schema](config.schema.json))
+or copy it from another machine. The `secret/config.json` file in this repository
+is encrypted, so it's unlikely that you'll be able to see it in clear text.
+You could generate a suitable GPG key, but GPG is not installed by default
+on macOS. So you'd have to install it manually or wth Homebrew instead of being
+installed for you. Your choice.
+
+Finally, clone this repo and run `make`. Provide the `NIXNAME` and
+`NIXUSER` if the default values don't suit you. If there are any errors,
 follow the error message (some folders may need permissions changed,
-some files may need to be deleted). That's it.
+some files may need to be deleted).
+That's it.
