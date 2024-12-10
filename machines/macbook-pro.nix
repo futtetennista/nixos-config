@@ -60,6 +60,8 @@
     shellcheck
   ];
 
+  security.pam.enableSudoTouchIdAuth = true;
+
   system.defaults = {
     dock.autohide = true;
     dock.mru-spaces = false;
