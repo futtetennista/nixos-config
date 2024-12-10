@@ -13,6 +13,15 @@ function replace_secrets {
     keys+=("$line")
   done < <(jq --raw-output 'keys[]' secret/config.json)
 
+  local -r grep_excludes=(
+    '--exclude-dir=.git-crypt'
+    '--exclude-dir=.git'
+    '--exclude-dir=result'
+    '--exclude-dir=secret'
+    '--exclude=config.schema.json'
+    '--exclude=replace_secrets.sh'
+    '--exclude=README.md'
+  )
   for key in "${keys[@]}"; do
     if [[ "$key" != @@*  ]]; then
       continue
@@ -20,7 +29,7 @@ function replace_secrets {
 
     value=$(jq --raw-output --arg key "$key" '.[$key]' secret/config.json)
     # Find and replace key with value in all files in the repo
-    (grep --recursive --files-with-matches --exclude-dir=secret --exclude=config.schema.json --exclude=README.md --exclude=replace_secrets.sh "$key" "$PWD" || true) | while read -r file; do
+    (grep --recursive --files-with-matches "${grep_excludes[@]}" "$key" "$PWD" || true) | while read -r file; do
       set +e
       if ! sed -i '' "s|$key|$value|g" "$file"; then
         sed -i "s|$key|$value|g" "$file"
