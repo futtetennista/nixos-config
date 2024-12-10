@@ -49,14 +49,6 @@
       }
       "flux"
       {
-        name = "google-chrome";
-        args = { require_sha = true; };
-      }
-      {
-        name = "gnupg";
-        args = { require_sha = true; };
-      }
-      {
         name = "openoffice";
         args = { require_sha = true; };
       }
@@ -76,6 +68,8 @@
 
     masApps = {
       Bear = 1091189122;
+      # Install it through the Mac App Store because the Homebrew version doesn't have a SHA.
+      GoogleChrome = 535886823;
       Kindle = 302584613;
       # Install it through the Mac App Store because the Homebrew version wasn't working correctly.
       NordVPN = 905953485;
