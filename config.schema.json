@@ -17,9 +17,6 @@
       "type": "string",
       "format": "email"
     },
-    "@@programs.git.signing.key@@": {
-      "type": "string"
-    },
     "@@github.user@@": {
       "type": "string"
     },
@@ -30,7 +27,7 @@
     "@@nixCache.publicKey@@": {
       "type": "string"
     },
-    "@@ssh-agent.key.path@@": {
+    "@@ssh.key.path@@": {
       "type": "string"
     },
     "@@system.user@@": {
@@ -41,11 +38,10 @@
     "environment_variables",
     "@@programs.git.userName@@",
     "@@programs.git.userEmail@@",
-    "@@programs.git.signing.key@@",
     "@@github.user@@",
     "@@nixCache.url@@",
     "@@nixCache.publicKey@@",
-    "@@ssh-agent.key.path@@",
+    "@@ssh.key.path@@",
     "@@system.user@@"
   ]
 }
