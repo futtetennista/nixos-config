@@ -21,11 +21,15 @@ function replace_secrets {
     value=$(jq --raw-output --arg key "$key" '.[$key]' secret/config.json)
     # Find and replace key with value in all files in the repo
     (grep --recursive --files-with-matches --exclude-dir=secret --exclude=config.schema.json --exclude=README.md --exclude=replace_secrets.sh "$key" "$PWD" || true) | while read -r file; do
-      sed -i '' "s|$key|$value|g" "$file" || sed -i "s|$key|$value|g" "$file"
+      set +e
+      if ! sed -i '' "s|$key|$value|g" "$file"; then
+        sed -i "s|$key|$value|g" "$file"
+      fi
+      set -e
     done
   done
 
-  git diff -G '@@.*@@' -- ':(exclude)replace_secrets.sh' > "${1:-/tmp/replace_secrets.diff}"
+  git diff -G '@@.*@@' -- ':(exclude)Makefile' ':(exclude)replace_secrets.sh' > "${1:-/tmp/replace_secrets.diff}"
 
   echo "[replace_secrets.sh] Secrets replaced successfully."
 }
