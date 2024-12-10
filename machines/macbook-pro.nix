@@ -37,14 +37,16 @@
 
   # zsh is the default shell on Mac and we want to make sure that we're
   # configuring the rc correctly with nix-darwin paths.
-  programs.zsh.enable = true;
-  programs.zsh.shellInit = ''
-    # Nix
-    if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-    fi
-    # End Nix
+  programs.zsh = {
+    enable = true;
+    shellInit = ''
+      # Nix
+      if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+        . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+      fi
+      # End Nix
     '';
+  };
 
   environment.shells = with pkgs; [ bashInteractive zsh ];
   environment.systemPackages = with pkgs; [
@@ -68,5 +70,31 @@
     finder.AppleShowAllExtensions = true;
     finder.FXPreferredViewStyle = "Nlsv";
     screencapture.location = "~/Desktop/screenshots";
+    trackpad = {
+      Clicking = true;
+      TrackpadThreeFingerDrag = true;
+    };
+
+    CustomUserPreferences = {
+      NSGlobalDomain = {
+        # Enable standard function keys (F1, F2, etc.)
+        "com.apple.keyboard.fnState" = true;
+        # Enable full keyboard access
+        AppleKeyboardUIMode = 3;
+        ApplePressAndHoldEnabled = false;
+        # Set initial key repeat delay (lower = shorter delay until repeat)
+        InitialKeyRepeat = 15;
+        # Set key repeat rate (lower = faster)
+        KeyRepeat = 2;
+      };
+      "com.apple.symbolichotkeys" = {
+        AppleSymbolicHotKeys = {
+          # Disable CMD+SPACE for Spotlight
+          64 = { enabled = false; value = { parameters = (32, 49, 1048576); type = standard; }; };
+          # Disable CMD+Option+SPACE for Spotlight window
+          65 = { enabled = false; value = { parameters = (32, 49, 1572864); type = standard; }; };
+        }
+      }
+    };
   };
 }

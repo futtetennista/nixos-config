@@ -29,9 +29,6 @@
   ];
 
   homebrew = {
-    brews = [
-      "gnupg"
-    ];
     enable = true;
     casks  = [
       {
@@ -49,6 +46,7 @@
       }
       "flux"
       "google-chrome"
+      "gpg-suite"
       {
         name = "openoffice";
         args = { require_sha = true; };
@@ -83,6 +81,19 @@
       upgrade = false;
     };
   };
+
+  # services ={
+  #   launchd = {
+  #     enable = true;
+  #     agents = {
+  #       rectangle = {
+  #         program = "${pkgs.homebrew}/bin/rectangle";
+  #         runAtLoad = true;
+  #       };
+  #       }
+  #     };
+  #   }
+  # }
 
   # The user should already exist, but we need to set this up so Nix knows
   # what our home directory is (https://github.com/LnL7/nix-darwin/issues/423).
