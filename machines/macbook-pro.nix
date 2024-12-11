@@ -52,17 +52,19 @@
     '';
   };
 
-  environment.shells = with pkgs; [ bashInteractive zsh ];
-  environment.systemPackages = with pkgs; [
-    cachix
-    curl
-    docker
-    gh
-    git
-    git-crypt
-    jq
-    npins
-    pre-commit
-    shellcheck
-  ];
+  environment = {
+    shells = with pkgs; [ bashInteractive zsh ];
+    systemPackages = with pkgs; [
+      # cachix
+      curl
+      # docker
+      # gh
+      # git
+      # git-crypt
+      jq
+      # npins
+      # pre-commit
+      # shellcheck
+    ];
+  };
 }
