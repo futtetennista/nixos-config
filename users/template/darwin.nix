@@ -1,35 +1,5 @@
 { currentSystemUser, inputs, lib, pkgs, ... }:
 
-let
-  pcloud = pkgs.stdenv.mkDerivation rec {
-    pname = "pCloud";
-    version = "3.15.3";
-
-    src = pkgs.fetchurl {
-      url = "https://p-lux3.pcloud.com/cBZsrH7S3ZlEdE7b7ZZZJzaLXkZyzZZo6RZkZylql0Z9HZtHZ4HZBQZqzZERZmYZq4Zr4ZOzZj8Z1LZSHZxzZntNX5ZRWG41961LczxPHnqSGHon4Kj6lXy/${pname}%20Drive%20${version}%20UNIVERSAL.pkg";
-      sha256 = "sha256-LTiA/y/4yBmRcO5N0P6UeyJUckNp7lokofAGrRihves=";
-    };
-
-    dontUnpack = true;
-    dontBuild = true;
-
-    installPhase = ''
-      runHook preInstall
-
-      mkdir -p $out/pkgs
-      cp $src $out/pkgs/installer.pkg
-
-      runHook postInstall
-    '';
-
-    meta = with lib; {
-      description = "Secure and simple to use cloud storage for your files; pCloud Drive, Electron Edition";
-      homepage = "https://www.pcloud.com/";
-      sourceProvenance = with sourceTypes; [ binaryNativeCode ];
-      license = licenses.unfree;
-    };
-  };
-in
 {
   launchd = {
     agents = {
@@ -126,13 +96,7 @@ in
   security.pam.enableSudoTouchIdAuth = true;
 
   # nix-darwin doesn't expose any API for this, so we have to do it manually.
-  system.activationScripts.postActivation.text =
-    let addLoginItemsScript = builtins.readFile ./add_login_items.sh;
-    in ''
-      ${addLoginItemsScript}
-      echo "installing pCloud"
-      sudo installer -pkg ${pcloud}/pkgs/installer.pkg -target /
-    '';
+  system.activationScripts.postActivation.text = builtins.readFile ./add_login_items.sh;
 
   system.defaults = {
     dock.autohide = true;
@@ -401,7 +365,6 @@ in
       pkgs.git
       pkgs.git-crypt
       pkgs.npins
-      pcloud
       pkgs.pre-commit
       pkgs.shellcheck
     ];
