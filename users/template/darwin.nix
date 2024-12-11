@@ -1,4 +1,4 @@
-{ currentSystemUser, inputs, lib, pkgs, ... }:
+{ currentSystemUser, currentSystemHasBiometricSupport, inputs, lib, pkgs, ... }:
 
 {
   launchd = {
@@ -93,7 +93,7 @@
     };
   };
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.enableSudoTouchIdAuth = currentSystemHasBiometricSupport;
 
   # nix-darwin doesn't expose any API for this, so we have to do it manually.
   system.activationScripts.postActivation.text = builtins.readFile ./add_login_items.sh;

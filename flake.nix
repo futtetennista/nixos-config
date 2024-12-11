@@ -54,41 +54,43 @@
   in {
     # nixosConfigurations.vm-aarch64 = mkSystem "vm-aarch64" {
     #   system = "aarch64-linux";
-    #   user = "@@system.user@@";
+    #   user = "futtetennista";
     # };
 
     # nixosConfigurations.vm-aarch64-prl = mkSystem "vm-aarch64-prl" rec {
     #   system = "aarch64-linux";
-    #   user = "@@system.user@@";
+    #   user = "futtetennista";
     # };
 
     # nixosConfigurations.vm-aarch64-utm = mkSystem "vm-aarch64-utm" rec {
     #   system = "aarch64-linux";
-    #   user = "@@system.user@@";
+    #   user = "futtetennista";
     # };
 
     # nixosConfigurations.vm-intel = mkSystem "vm-intel" rec {
     #   system = "x86_64-linux";
-    #   user = "@@system.user@@";
+    #   user = "futtetennista";
     # };
 
     # nixosConfigurations.wsl = mkSystem "wsl" {
     #   system = "x86_64-linux";
-    #   user = "@@system.user@@";
+    #   user = "futtetennista";
     #   wsl    = true;
     # };
 
     darwinConfigurations.macbook-pro-intel = mkSystem "macbook-pro-intel" {
+      biometricSupport = false;
+      darwin = true;
       system = "x86_64-darwin";
       user = "@@system.user@@";
-      darwin = true;
       version = "Monterey12";
     };
 
     darwinConfigurations.macbook-pro-m1 = mkSystem "macbook-pro-m1" {
+      biometricSupport = true;
+      darwin = true;
       system = "aarch64-darwin";
       user = "@@system.user@@";
-      darwin = true;
     };
   };
 }

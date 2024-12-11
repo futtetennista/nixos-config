@@ -8,6 +8,7 @@ name:
   user,
   darwin ? false,
   wsl ? false,
+  biometricSupport,
   version ? ""
 }:
 
@@ -60,6 +61,7 @@ in systemFunc rec {
         currentSystem = system;
         currentSystemName = name;
         currentSystemVersion = if darwin then (if version != "" then version else "Sequoia15") else "";
+        currentSystemHasBiometricSupport = biometricSupport;
       };
     }
   ];
