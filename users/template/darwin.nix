@@ -48,7 +48,10 @@
         name = "firefox";
         args = { require_sha = true; };
       }
-      "flux"
+      {
+        name = "flux";
+        args = { require_sha = true; };
+      }
       "google-chrome"
       "gpg-suite"
       {

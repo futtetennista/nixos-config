@@ -15,9 +15,10 @@ add_login_item() {
 }
 
 apps=(
+  "/Applications/Flux.app"
+  "/Applications/NordVPN.app"
   "/Applications/Rectangle.app"
   "/Applications/Raycast.app"
-  "/Applications/NordVPN.app"
 )
 
 for app in "${apps[@]}"; do
