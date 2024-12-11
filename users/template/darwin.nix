@@ -17,15 +17,7 @@ let
       runHook preInstall
 
       mkdir -p $out/pkgs
-      cp $src $out/pkgs/${pname}-${version}.pkg
-
-      # Create installation script
-      mkdir -p $out/bin
-      cat > $out/bin/install-pcloud.sh <<EOF
-      #!usr/bin/env bash
-      sudo installer -pkg $out/pkgs/${pname}-${version}.pkg -target /
-      EOF
-      chmod +x $out/bin/install-pcloud.sh
+      cp $src $out/pkgs/installer.pkg
 
       runHook postInstall
     '';
@@ -138,7 +130,8 @@ in
     let addLoginItemsScript = builtins.readFile ./add_login_items.sh;
     in ''
       ${addLoginItemsScript}
-      ${pcloud}/bin/install-pcloud.sh
+      echo "installing pCloud"
+      sudo installer -pkg ${pcloud}/pkgs/installer.pkg -target /
     '';
 
   system.defaults = {
