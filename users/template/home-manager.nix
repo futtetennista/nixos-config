@@ -83,6 +83,7 @@ in {
     pkgs._1password-cli
     pkgs.asciinema
     pkgs.bat
+    pkgs.curl
     pkgs.eza
     pkgs.fd
     pkgs.fzf
@@ -101,8 +102,7 @@ in {
     pkgs.python312
   ] ++ (lib.optionals isDarwin [
     # This is automatically setup on Linux
-    pkgs.cachix
-    pkgs.tailscale
+    # pkgs.tailscale
   ]) ++ (lib.optionals (isLinux && !isWSL) [
     pkgs.chromium
     pkgs.firefox
@@ -257,6 +257,23 @@ in {
       # user.signingkey = "@@ssh.key.path@@.pub";
     };
   };
+
+  # programs.ssh = {
+  #   enable = true;
+  #   extraConfig = ''
+  #     # Host *
+  #     #   IgnoreUnknown UseKeychain
+  #     Host github.com
+  #       AddKeysToAgent yes
+  #       ForwardX11 yes
+  #       HostName github.com
+  #       IdentitiesOnly yes
+  #       IdentityFile @@ssh.key.path@@
+  #       RequestTTY yes
+  #       UseKeychain yes
+  #       User @@github.user@@
+  #   '';
+  # };
 
   # programs.go = {
   #   enable = true;
