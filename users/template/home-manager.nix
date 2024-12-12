@@ -253,27 +253,26 @@ in {
       push.authSetupRemote = true;
       push.default = "tracking";
       rebase.autoStash = true;
-      # gpg.format = "ssh";
-      # user.signingkey = "@@ssh.key.path@@.pub";
     };
   };
 
-  # programs.ssh = {
-  #   enable = true;
-  #   extraConfig = ''
-  #     # Host *
-  #     #   IgnoreUnknown UseKeychain
-  #     Host github.com
-  #       AddKeysToAgent yes
-  #       ForwardX11 yes
-  #       HostName github.com
-  #       IdentitiesOnly yes
-  #       IdentityFile @@ssh.key.path@@
-  #       RequestTTY yes
-  #       UseKeychain yes
-  #       User @@github.user@@
-  #   '';
-  # };
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      "github.com" = {
+        extraOptions = {
+          addKeysToAgent = "yes";
+          requestTTY = "yes";
+          useKeychain = "yes";
+        };
+        forwardX11 = true;
+        hostname  = "github.com";
+        identityFile = "@@ssh.key.path@@";
+        identitiesOnly = true;
+        user = "@@github.user@@";
+      };
+    };
+  };
 
   # programs.go = {
   #   enable = true;
