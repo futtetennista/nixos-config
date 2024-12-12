@@ -124,7 +124,7 @@ in {
     LC_CTYPE = "en_US.UTF-8";
     MANPAGER = "${manpager}/bin/manpager";
     PAGER = "less -FirSwX";
-  } // (builtins.fromJSON (builtins.readFile ../../secret/config.json)).environment_variables;
+  } // (builtins.fromJSON (builtins.readFile ../../secret/env.json));
 
   home.file = {
     ".psqlrc".source = ./psqlrc;

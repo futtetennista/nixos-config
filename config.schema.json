@@ -3,10 +3,6 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "environment_variables": {
-      "type": "object",
-      "additionalProperties": true
-    },
     "@@env.path@@": {
       "type": "string"
     },
@@ -38,7 +34,6 @@
     }
   },
   "required": [
-    "environment_variables",
     "@@programs.git.signing.key@@",
     "@@programs.git.userName@@",
     "@@programs.git.userEmail@@",

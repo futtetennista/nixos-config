@@ -23,10 +23,6 @@ function replace_secrets {
     '--exclude=README.md'
   )
   for key in "${keys[@]}"; do
-    if [[ "$key" != @@*  ]]; then
-      continue
-    fi
-
     value=$(jq --raw-output --arg key "$key" '.[$key]' secret/config.json)
     # Find and replace key with value in all files in the repo
     (grep --recursive --files-with-matches "${grep_excludes[@]}" "$key" "$PWD" || true) | while read -r file; do
