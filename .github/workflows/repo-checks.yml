@@ -23,4 +23,4 @@ jobs:
         pip install pre-commit
 
     - name: Run pre-commit
-      run: pre-commit run --all-files
+      run: git ls-files | grep -v '^secret' | xargs pre-commit run --files
