@@ -264,11 +264,13 @@ in {
 
   programs.ssh = {
     enable = true;
+    extraOptionOverrides = {
+      IgnoreUnknown = "UseKeychain";
+    };
     matchBlocks = {
       "github.com" = {
         extraOptions = {
           addKeysToAgent = "yes";
-          ignoreUnknown = "UseKeychain";
           requestTTY = "yes";
           useKeychain = "yes";
         };

@@ -59,10 +59,6 @@
         args = { require_sha = true; };
       }
       {
-        name = "proton-drive";
-        args = { require_sha = true; };
-      }
-      {
         name = "raycast";
         args = { require_sha = true; };
       }
@@ -80,7 +76,12 @@
         args = { require_sha = true; };
       }
       "zoom"
-    ];
+    ] ++ (if lib.toInt currentSystemOSVersion > 12 then [
+      {
+        name = "proton-drive";
+        args = { require_sha = true; };
+      }
+    ] else []);
 
     masApps = {
       "1Password for Safari" = 1569813296;
