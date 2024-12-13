@@ -255,6 +255,7 @@ in {
       credential.helper = "store"; # want to make this more secure
       github.user = "@@github.user@@";
       init.defaultBranch = "main";
+      pull.rebase = true;
       push.authSetupRemote = true;
       push.default = "tracking";
       rebase.autoStash = true;
