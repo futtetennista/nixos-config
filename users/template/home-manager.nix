@@ -241,7 +241,7 @@ in {
       s = "status";
       size = "count-objects -vH";
       undo = "reset HEAD~";
-      zip = "archive --format=zip --output $(basename \"$PWD\").zip HEAD";
+      zip = "!__zip() { git archive --format=zip --output=\"$(basename \"$PWD\").zip\" HEAD; }; __zip";
       cleanup = "!git branch --merged | grep  -v '\\*\\|main\\|develop' | xargs -n 1 -r git branch -d";
       # Invoke it like this: git h -- <file>
       h = "log -p --follow";
