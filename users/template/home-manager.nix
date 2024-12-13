@@ -268,6 +268,7 @@ in {
       "github.com" = {
         extraOptions = {
           addKeysToAgent = "yes";
+          ignoreUnknown = "UseKeychain";
           requestTTY = "yes";
           useKeychain = "yes";
         };
