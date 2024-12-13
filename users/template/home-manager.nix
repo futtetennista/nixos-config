@@ -83,23 +83,28 @@ in {
     pkgs._1password-cli
     pkgs.asciinema
     pkgs.bat
+    pkgs.cachix
     pkgs.curl
+    pkgs.docker
     pkgs.eza
     pkgs.fd
     pkgs.fzf
     pkgs.gh
+    pkgs.git
+    # pkgs.gopls
+    pkgs.git-crypt
     pkgs.htop
     pkgs.jq
+    pkgs.nodejs
+    pkgs.npins
+    pkgs.pre-commit
+    pkgs.python312
     pkgs.ripgrep
     # pkgs.sentry-cli
+    pkgs.shellcheck
     pkgs.tree
     pkgs.watch
-
-    # pkgs.gopls
     # pkgs.zigpkgs."0.13.0"
-
-    pkgs.nodejs
-    pkgs.python312
   ] ++ (lib.optionals isDarwin [
     # This is automatically setup on Linux
     # pkgs.tailscale

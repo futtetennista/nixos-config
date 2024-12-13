@@ -361,18 +361,6 @@
   # what our home directory is (https://github.com/LnL7/nix-darwin/issues/423).
   users.users.${currentSystemUser} = {
     home = /Users/${currentSystemUser};
-
-    packages = [
-      pkgs.cachix
-      pkgs.docker
-      pkgs.gh
-      pkgs.git
-      pkgs.git-crypt
-      pkgs.npins
-      pkgs.pre-commit
-      pkgs.shellcheck
-    ];
-
     shell = pkgs.zsh;
   };
 }
