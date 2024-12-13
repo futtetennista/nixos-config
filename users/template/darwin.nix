@@ -59,6 +59,10 @@
         args = { require_sha = true; };
       }
       {
+        name = "proton-drive";
+        args = { require_sha = true; };
+      }
+      {
         name = "raycast";
         args = { require_sha = true; };
       }
