@@ -274,7 +274,7 @@ in {
           requestTTY = "yes";
           useKeychain = "yes";
         };
-        forwardX11 = true;
+        # forwardX11 = true;
         hostname  = "github.com";
         identityFile = "@@ssh.key.path@@";
         identitiesOnly = true;
