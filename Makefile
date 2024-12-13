@@ -24,13 +24,11 @@ else
 endif
 NIXUSER ?= futtetennista
 
-switch: switch_darwin.sh
+switch: switch_darwin.sh switch_other.sh
 ifeq ($(UNAME), Darwin)
 	@./switch_darwin.sh && ($(MAKE) cleanup) || (code=$$?; $(MAKE) cleanup; exit $$code)
 else
-	./replace_secrets.sh$(DIFF_FILE)
-	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#$(NIXNAME)"
-	git apply -R $(DIFF_FILE)
+	@./switch_other.sh && ($(MAKE) cleanup) || (code=$$?; $(MAKE) cleanup; exit $$code)
 endif
 
 cleanup:
@@ -46,16 +44,21 @@ switch_darwin.sh:
 	@echo './result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#$(NIXNAME)"' >> $@
 	@chmod +x $@
 
+switch_other.sh:
+	@echo '#!/usr/bin/env bash' > $@
+	@echo 'set -euo pipefail' >> $@
+	@echo './replace_secrets.sh$(DIFF_FILE)' >> $@
+	@echo 'sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#$(NIXNAME)"' >> $@
+	@chmod +x $@
+
 check:
 	$(MAKE) test
 
-test: test_darwin.sh
+test: test_darwin.sh test_other.sh
 ifeq ($(UNAME), Darwin)
 	@./test_darwin.sh && ($(MAKE) cleanup) || (code=$$?; $(MAKE) cleanup; exit $$code)
 else
-	./replace_secrets.sh $(DIFF_FILE)
-	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild check --flake ".#$(NIXNAME)"
-	git apply -R $(DIFF_FILE)
+	@./test_other.sh && ($(MAKE) cleanup) || (code=$$?; $(MAKE) cleanup; exit $$code)
 endif
 
 test_darwin.sh:
@@ -64,6 +67,13 @@ test_darwin.sh:
 	@echo './replace_secrets.sh $(DIFF_FILE)' >> $@
 	@echo 'nix --extra-experimental-features nix-command --extra-experimental-features flakes build ".#darwinConfigurations.$(NIXNAME).system"' >> $@
 	@echo './result/sw/bin/darwin-rebuild check --flake "$$(pwd)#$(NIXNAME)"' >> $@
+	@chmod +x $@
+
+test_other.sh:
+	@echo '#!/usr/bin/env bash' > $@
+	@echo 'set -euo pipefail' >> $@
+	@echo './replace_secrets.sh $(DIFF_FILE)' >> $@
+	@echo 'sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild check --flake ".#$(NIXNAME)"' >> $@
 	@chmod +x $@
 
 # This builds the given NixOS configuration and pushes the results to the
