@@ -1,4 +1,5 @@
 {
+  "files.autoSave": "onFocusChange",
   "cloudcode.apigee.dockerOptions": {
     "environmentVariables": {
       "XTERM": "xterm-256color"
