@@ -1,4 +1,4 @@
-{ currentSystemUser, currentSystemHasBiometricSupport, inputs, lib, pkgs, ... }:
+{ currentSystemUser, currentSystemOSVersion, currentSystemHasBiometricSupport, inputs, lib, pkgs, ... }:
 
 {
   launchd = {

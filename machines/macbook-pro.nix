@@ -1,4 +1,4 @@
-{ config, lib, pkgs, currentSystemVersion, currentSystemUser, ... }:
+{ config, lib, pkgs, currentSystemOSVersion, currentSystemUser, ... }:
 
 {
   # Set in Sept 2024 as part of the macOS Sequoia release.
@@ -15,7 +15,7 @@
   # > If you have no intention of upgrading to macOS Sequoia 15, or already
   # > have a custom UID range that you know is compatible with Sequoia, you
   # > can disable this check by setting:
-  ids.uids.nixbld = lib.mkIf (currentSystemVersion != "Sequoia15") 300;
+  ids.uids.nixbld = lib.mkIf (currentSystemOSVersion != "15") 300;
 
   # Keep in async with vm-shared.nix. (todo: pull this out into a file)
   nix = {

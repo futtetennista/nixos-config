@@ -82,14 +82,15 @@
       biometricSupport = false;
       darwin = true;
       system = "x86_64-darwin";
+      osVersion = "12";
       user = "@@system.user@@";
-      version = "Monterey12";
     };
 
     darwinConfigurations.macbook-pro-m1 = mkSystem "macbook-pro-m1" {
       biometricSupport = true;
       darwin = true;
       system = "aarch64-darwin";
+      osVersion = "15";
       user = "@@system.user@@";
     };
   };

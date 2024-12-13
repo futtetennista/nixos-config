@@ -9,7 +9,7 @@ name:
   darwin ? false,
   wsl ? false,
   biometricSupport,
-  version ? ""
+  osVersion
 }:
 
 let
@@ -60,7 +60,7 @@ in systemFunc rec {
         inherit isWSL inputs currentSystemUser;
         currentSystem = system;
         currentSystemName = name;
-        currentSystemVersion = if darwin then (if version != "" then version else "Sequoia15") else "";
+        currentSystemOSVersion = if darwin then (if osVersion != "" then osVersion else "15") else "";
         currentSystemHasBiometricSupport = biometricSupport;
       };
     }
