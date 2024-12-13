@@ -4,7 +4,7 @@ set -euo pipefail
 
 function replace_secrets {
   if [ ! -f secret/config.json ]; then
-    echo -e "\033[0;31m[replace_secrets.sh] secret/config.json not found!\033[0m"
+    echo -e "\033[0;31m[replace_secrets] secret/config.json not found!\033[0m"
     exit 1
   fi
 
@@ -36,7 +36,7 @@ function replace_secrets {
 
   git diff -G '@@.*@@' -- ':(exclude)Makefile' ':(exclude)replace_secrets.sh' > "${1:-/tmp/replace_secrets.diff}"
 
-  echo "[replace_secrets.sh] Secrets replaced successfully."
+  echo "[replace_secrets] Secrets replaced successfully."
 }
 
 function main() {

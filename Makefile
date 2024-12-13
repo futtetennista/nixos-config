@@ -9,6 +9,9 @@ MAKEFILE_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 # reused a lot so we just store them up here.
 SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 
+DIFF_FILE := /tmp/replace_secrets.diff
+TEMP_FILES := switch*.sh test*.sh $(DIFF_FILE)
+
 # We need to do some OS switching below.
 UNAME := $(shell uname)
 
@@ -21,32 +24,47 @@ else
 endif
 NIXUSER ?= futtetennista
 
-switch:
+switch: switch_darwin.sh
 ifeq ($(UNAME), Darwin)
-	./replace_secrets.sh /tmp/replace_secrets.diff
-	nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.$(NIXNAME).system"
-	./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#$(NIXNAME)"
-	git apply -R /tmp/replace_secrets.diff
+	@./switch_darwin.sh && ($(MAKE) cleanup) || (code=$$?; $(MAKE) cleanup; exit $$code)
 else
-	./replace_secrets.sh /tmp/replace_secrets.diff
+	./replace_secrets.sh$(DIFF_FILE)
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#$(NIXNAME)"
-	git apply -R /tmp/replace_secrets.diff
+	git apply -R $(DIFF_FILE)
 endif
+
+cleanup:
+	@echo '[cleanup] Removing temporary files and reverting secrets'
+	@git apply -R $(DIFF_FILE)
+	@rm -f $(TEMP_FILES)
+
+switch_darwin.sh:
+	@echo '#!/usr/bin/env bash' > $@
+	@echo 'set -euo pipefail' >> $@
+	@echo './replace_secrets.sh $(DIFF_FILE)' >> $@
+	@echo 'nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.$(NIXNAME).system"' >> $@
+	@echo './result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#$(NIXNAME)"' >> $@
+	@chmod +x $@
 
 check:
 	$(MAKE) test
 
-test:
+test: test_darwin.sh
 ifeq ($(UNAME), Darwin)
-	./replace_secrets.sh /tmp/replace_secrets.diff
-	nix --extra-experimental-features nix-command --extra-experimental-features flakes build ".#darwinConfigurations.$(NIXNAME).system"
-	./result/sw/bin/darwin-rebuild check --flake "$$(pwd)#$(NIXNAME)"
-	git apply -R /tmp/replace_secrets.diff
+	@./test_darwin.sh && ($(MAKE) cleanup) || (code=$$?; $(MAKE) cleanup; exit $$code)
 else
-	./replace_secrets.sh /tmp/replace_secrets.diff
+	./replace_secrets.sh $(DIFF_FILE)
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild check --flake ".#$(NIXNAME)"
-	git apply -R /tmp/replace_secrets.diff
+	git apply -R $(DIFF_FILE)
 endif
+
+test_darwin.sh:
+	@echo '#!/usr/bin/env bash' > $@
+	@echo 'set -euo pipefail' >> $@
+	@echo './replace_secrets.sh $(DIFF_FILE)' >> $@
+	@echo 'nix --extra-experimental-features nix-command --extra-experimental-features flakes build ".#darwinConfigurations.$(NIXNAME).system"' >> $@
+	@echo './result/sw/bin/darwin-rebuild check --flake "$$(pwd)#$(NIXNAME)"' >> $@
+	@chmod +x $@
 
 # This builds the given NixOS configuration and pushes the results to the
 # cache. This does not alter the current running system. This requires
