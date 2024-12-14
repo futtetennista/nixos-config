@@ -1,4 +1,4 @@
-{ currentSystemUser, currentSystemOSVersion, currentSystemHasBiometricSupport, inputs, lib, pkgs, ... }:
+{ currentSystemUser, currentSystemOSVersion, currentSystemDisplaySize, currentSystemHasBiometricSupport, inputs, lib, pkgs, ... }:
 
 {
   launchd = {
@@ -22,6 +22,12 @@
         };
       };
     };
+  };
+
+  networking = {
+    computerName = "@@networking.computerNamePrefix@@${builtins.substring 0 2 currentSystemDisplaySize}";
+    localHostName = "@@networking.computerNamePrefix@@${builtins.substring 0 2 currentSystemDisplaySize}";
+    hostName = "@@networking.computerNamePrefix@@${builtins.substring 0 2 currentSystemDisplaySize}";
   };
 
   nixpkgs.overlays = import ../../lib/overlays.nix ++ [

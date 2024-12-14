@@ -26,9 +26,9 @@ NIXUSER ?= futtetennista
 
 switch: switch_darwin.sh switch_other.sh
 ifeq ($(UNAME), Darwin)
-	@./switch_darwin.sh && ($(MAKE) cleanup) || (code=$$?; $(MAKE) cleanup; exit $$code)
+	@./switch_darwin.sh && $(MAKE) cleanup || (code=$$?; $(MAKE) cleanup; exit $$code)
 else
-	@./switch_other.sh && ($(MAKE) cleanup) || (code=$$?; $(MAKE) cleanup; exit $$code)
+	@./switch_other.sh && $(MAKE) cleanup || (code=$$?; $(MAKE) cleanup; exit $$code)
 endif
 
 cleanup:
@@ -56,9 +56,9 @@ check:
 
 test: test_darwin.sh test_other.sh
 ifeq ($(UNAME), Darwin)
-	@./test_darwin.sh && ($(MAKE) cleanup) || (code=$$?; $(MAKE) cleanup; exit $$code)
+	@./test_darwin.sh && $(MAKE) cleanup || (code=$$?; $(MAKE) cleanup; exit $$code)
 else
-	@./test_other.sh && ($(MAKE) cleanup) || (code=$$?; $(MAKE) cleanup; exit $$code)
+	@./test_other.sh && $(MAKE) cleanup || (code=$$?; $(MAKE) cleanup; exit $$code)
 endif
 
 test_darwin.sh:

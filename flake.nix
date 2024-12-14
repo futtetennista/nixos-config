@@ -81,17 +81,21 @@
     darwinConfigurations.macbook-pro-intel = mkSystem "macbook-pro-intel" {
       biometricSupport = false;
       darwin = true;
+      displaySize = "15-inch";
       system = "x86_64-darwin";
       osVersion = "12";
       user = "@@system.user@@";
+      year = 2014;
     };
 
     darwinConfigurations.macbook-pro-m1 = mkSystem "macbook-pro-m1" {
       biometricSupport = true;
       darwin = true;
+      displaySize = "16-inch";
       system = "aarch64-darwin";
       osVersion = "15";
       user = "@@system.user@@";
+      year = 2023;
     };
   };
 }

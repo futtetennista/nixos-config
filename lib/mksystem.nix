@@ -4,12 +4,14 @@
 
 name:
 {
+  biometricSupport,
+  darwin ? false,
+  displaySize,
+  osVersion,
   system,
   user,
-  darwin ? false,
   wsl ? false,
-  biometricSupport,
-  osVersion
+  year
 }:
 
 let
@@ -62,6 +64,8 @@ in systemFunc rec {
         currentSystemName = name;
         currentSystemOSVersion = if darwin then (if osVersion != "" then osVersion else "15") else "";
         currentSystemHasBiometricSupport = biometricSupport;
+        currentSystemDisplaySize = displaySize;
+        currentSystemProductionYear = year;
       };
     }
   ];
