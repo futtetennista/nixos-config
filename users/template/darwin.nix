@@ -49,6 +49,10 @@
       "anki"
       # "cleanshot"
       "calibre"
+      {
+        name = "blackhole-2ch";
+        args = { require_sha = true; };
+      }
       "discord"
       {
         name = "firefox";
