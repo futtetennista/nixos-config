@@ -6,9 +6,6 @@
     "@@networking.computerNamePrefix@@": {
       "type": "string"
     },
-    "@@programs.git.signing.key@@": {
-      "type": "string"
-    },
     "@@programs.git.userName@@": {
       "type": "string"
     },
@@ -31,17 +28,20 @@
     },
     "@@system.user@@": {
       "type": "string"
+    },
+    "@@user.signingKey@@": {
+      "type": "string"
     }
   },
   "required": [
     "@@networking.computerNamePrefix@@",
-    "@@programs.git.signing.key@@",
     "@@programs.git.userName@@",
     "@@programs.git.userEmail@@",
     "@@github.user@@",
     "@@nixCache.url@@",
     "@@nixCache.publicKey@@",
     "@@ssh.key.path@@",
-    "@@system.user@@"
+    "@@system.user@@",
+    "@@user.signingKey@@"
   ]
 }

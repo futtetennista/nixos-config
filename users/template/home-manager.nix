@@ -228,10 +228,6 @@ in {
     enable = true;
     userName = "@@programs.git.userName@@";
     userEmail = "@@programs.git.userEmail@@";
-    signing = {
-      key = "@@programs.git.signing.key@@";
-      signByDefault = true;
-    };
     aliases = {
       amend = "commit --amend";
       cm = "commit -m";
@@ -259,6 +255,12 @@ in {
       push.authSetupRemote = true;
       push.default = "tracking";
       rebase.autoStash = true;
+    } // {
+      # https://developer.1password.com/docs/ssh/git-commit-signing/
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+      gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      user.signingkey = "@@user.signingKey@@";
     };
   };
 
@@ -267,6 +269,10 @@ in {
     extraOptionOverrides = {
       IgnoreUnknown = "UseKeychain";
     };
+    # https://developer.1password.com/docs/ssh/git-commit-signing/
+    extraConfig = ''
+      IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    '';
     matchBlocks = {
       "github.com" = {
         extraOptions = {
