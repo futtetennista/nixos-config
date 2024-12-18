@@ -223,6 +223,10 @@ in {
         exact = ["$HOME/.envrc"];
       };
     };
+  } // {
+    # https://github.com/nix-community/nix-direnv?tab=readme-ov-file#via-home-manager
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
   };
 
   programs.git = {

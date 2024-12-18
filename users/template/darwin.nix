@@ -30,6 +30,14 @@
     hostName = "@@networking.computerNamePrefix@@${builtins.substring 0 2 currentSystemDisplaySize}";
   };
 
+  # https://github.com/LnL7/nix-darwin/issues/145
+  nix.nixPath = pkgs.lib.mkForce [{
+    darwin-config = builtins.concatStringsSep ":" [
+      "$HOME/.nixpkgs/darwin-configuration.nix"
+      "$HOME/.nix-defexpr/channels"
+    ];
+  }];
+
   nixpkgs.overlays = import ../../lib/overlays.nix ++ [
     (import ./vim.nix { inherit inputs; })
   ];
