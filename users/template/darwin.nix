@@ -3,21 +3,30 @@
 {
   launchd = {
     agents = {
-      docker-system-prune = {
+      backup-data = {
         serviceConfig = {
-          ProgramArguments = ["/run/current-system/sw/bin/docker" "system" "prune" "--force" "--volumes"] ;
+          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_backup_data"];
           RunAtLoad = true;
-          StandardErrorPath = "/var/log/launch_agent-docker-system-prune.std-err";
-          StandardOutPath = "/var/log/launch_agent-docker-system-prune.out-err";
+          StandardErrorPath = "/var/log/launch_agent-backup-data.std-err";
+          StandardOutPath = "/var/log/launch_agent-backup-data.std-out";
+          StartInterval = 3600;
+        };
+      } ;
+      cleanup-docker = {
+        serviceConfig = {
+          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_cleanup_docker"];
+          RunAtLoad = true;
+          StandardErrorPath = "/var/log/launch_agent-cleanup-docker.std-err";
+          StandardOutPath = "/var/log/launch_agent-cleanup-docker.std-out";
           StartInterval = 86400;
         };
       };
-      nix-collect-garbage = {
+      cleanup-nix = {
         serviceConfig = {
-          ProgramArguments = ["/run/current-system/sw/bin/nix-collect-garbage" "-d"] ;
+          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_cleanup_nix"];
           RunAtLoad = true;
-          StandardErrorPath = "/var/log/launch_agent-nix-collect-garbage.std-err";
-          StandardOutPath = "/var/log/launch_agent-nix-collect-garbage.std-out";
+          StandardErrorPath = "/var/log/launch_agent-cleanup-nix.std-err";
+          StandardOutPath = "/var/log/launch_agent-cleanup-nix.std-out";
           StartInterval = 604800;
         };
       };

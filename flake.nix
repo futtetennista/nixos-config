@@ -54,27 +54,27 @@
   in {
     # nixosConfigurations.vm-aarch64 = mkSystem "vm-aarch64" {
     #   system = "aarch64-linux";
-    #   user = "futtetennista";
+    #   user = "@@system.user@@";
     # };
 
     # nixosConfigurations.vm-aarch64-prl = mkSystem "vm-aarch64-prl" rec {
     #   system = "aarch64-linux";
-    #   user = "futtetennista";
+    #   user = "@@system.user@@";
     # };
 
     # nixosConfigurations.vm-aarch64-utm = mkSystem "vm-aarch64-utm" rec {
     #   system = "aarch64-linux";
-    #   user = "futtetennista";
+    #   user = "@@system.user@@";
     # };
 
     # nixosConfigurations.vm-intel = mkSystem "vm-intel" rec {
     #   system = "x86_64-linux";
-    #   user = "futtetennista";
+    #   user = "@@system.user@@";
     # };
 
     # nixosConfigurations.wsl = mkSystem "wsl" {
     #   system = "x86_64-linux";
-    #   user = "futtetennista";
+    #   user = "@@system.user@@";
     #   wsl    = true;
     # };
 

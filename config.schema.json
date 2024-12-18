@@ -3,6 +3,9 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "@@backups.passwords.bear@@": {
+      "type": "string"
+    },
     "@@networking.computerNamePrefix@@": {
       "type": "string"
     },
@@ -12,6 +15,9 @@
     "@@programs.git.userEmail@@": {
       "type": "string",
       "format": "email"
+    },
+    "@@proton.email@@": {
+      "type": "string"
     },
     "@@github.user@@": {
       "type": "string"
@@ -34,12 +40,14 @@
     }
   },
   "required": [
-    "@@networking.computerNamePrefix@@",
-    "@@programs.git.userName@@",
-    "@@programs.git.userEmail@@",
+    "@@backups.passwords.bear@@",
     "@@github.user@@",
-    "@@nixCache.url@@",
+    "@@networking.computerNamePrefix@@",
     "@@nixCache.publicKey@@",
+    "@@nixCache.url@@",
+    "@@programs.git.userEmail@@",
+    "@@programs.git.userName@@",
+    "@@proton.email@@",
     "@@ssh.key.path@@",
     "@@system.user@@",
     "@@user.signingKey@@"

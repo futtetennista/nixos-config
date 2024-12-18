@@ -1,0 +1,31 @@
+set -euo pipefail
+
+declare -r DEST_DIR=/Users/@@system.user@@/Library/CloudStorage/ProtonDrive-@@proton.email@@-folder/Backups
+declare -r APP_DATA_DIR=/Users/@@system.user@@/Library/Group\ Containers/
+
+# Bear doesn't provide automated versioning or backups.
+# This is a simple backup script that creates a backup at regular intervals.
+# For now it's VERY unsophisticated and keeps only one version.
+function backup_bear {
+  local -r bear_dir=9K33E3U3T4.net.shinyfrog.bear/
+  local -r archive_name=bear.tar.gz
+
+  mkdir -p "$DEST_DIR"
+  tar -czf - -C "$APP_DATA_DIR" "$bear_dir" | gzip --best | openssl enc -aes-256-cbc -e -pbkdf2 -pass 'pass:@@backups.passwords.bear@@' -out "$DEST_DIR/$archive_name"
+}
+
+# Unpack archive using
+function unpack_backup {
+  local -r archive_name="${1?Missing archive name}"
+  shift
+  local -r password="${1?Missing password}"
+  shift
+
+  openssl enc -aes-256-cbc -d -pbkdf2 -pass pass:"$password" -in "${archive_name}" -out - | gzip -d | tar -xzf -
+}
+
+function main {
+  backup_bear
+}
+
+main "$@"
