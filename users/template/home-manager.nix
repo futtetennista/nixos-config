@@ -137,6 +137,7 @@ in {
   #   ".inputrc".source = ./inputrc;
   } // (if isDarwin then {
   #   "Library/Application Support/jj/config.toml".source = ./jujutsu.toml;
+    ".ssh/allowed_signers".source = ../../secret/allowed_signers;
   } else {});
 
   xdg = {
@@ -259,6 +260,7 @@ in {
       # https://developer.1password.com/docs/ssh/git-commit-signing/
       commit.gpgsign = true;
       gpg.format = "ssh";
+      gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
       gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
       user.signingkey = "@@user.signingKey@@";
     };
