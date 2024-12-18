@@ -257,7 +257,7 @@ in {
       github.user = "@@github.user@@";
       init.defaultBranch = "main";
       pull.rebase = true;
-      push.authSetupRemote = true;
+      push.autoSetupRemote = true;
       push.default = "tracking";
       rebase.autoStash = true;
     } // {
