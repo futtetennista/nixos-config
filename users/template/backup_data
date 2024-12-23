@@ -11,7 +11,9 @@ function backup_bear {
   local -r archive_name=bear.tar.gz
 
   mkdir -p "$DEST_DIR"
-  tar -czf - -C "$APP_DATA_DIR" "$bear_dir" | gzip --best | openssl enc -aes-256-cbc -e -pbkdf2 -pass 'pass:@@backups.passwords.bear@@' -out "$DEST_DIR/$archive_name"
+  tar -czf - -C "$APP_DATA_DIR" "$bear_dir" |
+    gzip --best |
+    openssl enc -aes-256-cbc -e -pbkdf2 -pass 'pass:@@backups.passwords.bear@@' -out "$DEST_DIR/$archive_name"
 }
 
 # Unpack archive using
@@ -21,7 +23,9 @@ function unpack_backup {
   local -r password="${1?Missing password}"
   shift
 
-  openssl enc -aes-256-cbc -d -pbkdf2 -pass pass:"$password" -in "${archive_name}" -out - | gzip -d | tar -xzf -
+  openssl enc -aes-256-cbc -d -pbkdf2 -pass pass:"$password" -in "${archive_name}" -out - |
+  gzip -d |
+  tar -xzf -
 }
 
 function main {

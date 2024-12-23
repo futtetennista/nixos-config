@@ -3,30 +3,33 @@
 {
   launchd = {
     agents = {
+      # TODO: this doesn't work
       backup-data = {
         serviceConfig = {
-          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_backup_data"];
+          GroupName = "staff";
+          InitGroups = true;
+          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_backup_data_1"];
           RunAtLoad = true;
-          StandardErrorPath = "/var/log/launch_agent-backup-data.std-err";
-          StandardOutPath = "/var/log/launch_agent-backup-data.std-out";
+          StandardErrorPath = "/var/log/org.nixos.backup-data/agent.err";
+          StandardOutPath = "/var/log/org.nixos.backup-data/agent.out";
           StartInterval = 3600;
         };
       } ;
-      cleanup-docker = {
+      cleanup-docker =
         serviceConfig = {
-          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_cleanup_docker"];
+          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_cleanup_docker_1"];
           RunAtLoad = true;
-          StandardErrorPath = "/var/log/launch_agent-cleanup-docker.std-err";
-          StandardOutPath = "/var/log/launch_agent-cleanup-docker.std-out";
+          StandardErrorPath = "/var/log/org.nixos.cleanup-docker/agent.err";
+          StandardOutPath = "/var/log/org.nixos.cleanup-docker/agent.out";
           StartInterval = 86400;
         };
       };
       cleanup-nix = {
         serviceConfig = {
-          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_cleanup_nix"];
+          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_cleanup_nix_1"];
           RunAtLoad = true;
-          StandardErrorPath = "/var/log/launch_agent-cleanup-nix.std-err";
-          StandardOutPath = "/var/log/launch_agent-cleanup-nix.std-out";
+          StandardErrorPath = "/var/log/org.nixos.cleanup-nix/agent.err";
+          StandardOutPath = "/var/log/org.nixos.cleanup-nix/agent.out";
           StartInterval = 604800;
         };
       };

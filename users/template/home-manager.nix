@@ -18,15 +18,25 @@ let
 
     mktplcRef = {
       name = "ormolu-vscode";
+      hash = "sha256-FJvxD4UcuNzdFAeOSFlwtGn9WDqs0Zl1uEvnTcI7yo0=";
       publisher = "sjurmillidahl";
       version = "0.0.10";
-      hash = "sha256-FJvxD4UcuNzdFAeOSFlwtGn9WDqs0Zl1uEvnTcI7yo0=";
     };
 
     postInstall = ''
       cd "$out/$installPrefix"
       jq '.contributes.configuration.properties."ormolu.path".default = "${pkgs.ormolu}/bin/ormolu"' package.json | sponge package.json
     '';
+
+  };
+
+  _1password.op-vscode = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      name = "op-vscode";
+      hash = "sha256-J7vAK2t6fSjm5i6y3+88aO84ipFwekQkJMD7W3EIWrc=";
+      publisher = "1Password";
+      version = "1.0.5";
+    };
   };
 
   #---------------------------------------------------------------------
@@ -68,11 +78,11 @@ let
     gt = "git tag";
   };
 
-  scriptBackupData = pkgs.writeShellScriptBin "@@system.user@@_backup_data" (builtins.readFile ./backup_data);
-  scriptCleanupNix = pkgs.writeShellScriptBin "@@system.user@@_cleaup_nix" ''
+  scriptBackupData = pkgs.writeShellScriptBin "@@system.user@@_backup_data_1" (builtins.readFile ./backup_data);
+  scriptCleanupNix = pkgs.writeShellScriptBin "@@system.user@@_cleaup_nix_1" ''
     /run/current-system/sw/bin/nix-collect-garbage -d
   '';
-  scriptCleanupDocker = pkgs.writeShellScriptBin "@@system.user@@_cleanup_docker" ''
+  scriptCleanupDocker = pkgs.writeShellScriptBin "@@system.user@@_cleanup_docker_1" ''
     /etc/profiles/per-user/@@system.user@@/bin/docker system prune --force --volumes
   '';
 in {
@@ -326,6 +336,7 @@ in {
       # ms-vscode.remote-explorer
       # trond-snekvik.simple-rst
       # visortelle.haskell-spotlight
+      _1password.op-vscode
       bbenoist.nix
       bierner.markdown-mermaid
       dbaeumer.vscode-eslint
