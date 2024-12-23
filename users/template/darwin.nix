@@ -153,6 +153,24 @@
     # and then I manually "nix-ified" the values.
     CustomUserPreferences = {
       NSGlobalDomain = {
+        "com.apple.DictionaryServices" = {
+          DCSActiveDictionaries = [
+            # Dictionary English (UK)
+            "com.apple.dictionary.ODE"
+            # Thesaurus English (UK)
+            "com.apple.dictionary.OTE"
+            "com.apple.dictionary.wikipedia"
+            "com.apple.dictionary.it.Devoto-Oli"
+            "com.apple.dictionary.fr.Multi"
+            "com.apple.dictionary.de.DDDSI"
+            # Italian - English
+            "com.apple.dictionary.OxfordItalian"
+            # French - English
+            "com.apple.dictionary.OxfordFrench"
+            # German - English
+            "com.apple.dictionary.OxfordGerman"
+          ];
+        };
         # Enable standard function keys (F1, F2, etc.)
         "com.apple.keyboard.fnState" = true;
         # Enable full keyboard access
