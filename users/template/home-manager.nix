@@ -78,14 +78,15 @@ let
     gt = "git tag";
   };
 
-  scriptBackupData = pkgs.writeShellScriptBin "@@system.user@@_backup_data_1" (builtins.readFile ./backup_data);
-  scriptCleanupNix = pkgs.writeShellScriptBin "@@system.user@@_cleaup_nix_1" ''
-    /run/current-system/sw/bin/nix-collect-garbage -d
-  '';
-  scriptCleanupDocker = pkgs.writeShellScriptBin "@@system.user@@_cleanup_docker_1" ''
+  scriptBackupData = pkgs.writeShellScriptBin "@@system.user@@_backup_data" (builtins.readFile ./backup_data);
+  scriptCleanupDocker = pkgs.writeShellScriptBin "@@system.user@@_cleanup_docker" ''
     /etc/profiles/per-user/@@system.user@@/bin/docker system prune --force --volumes
   '';
-in {
+  scriptCleanupNix = pkgs.writeShellScriptBin "@@system.user@@_cleaup_nix" ''
+    /run/current-system/sw/bin/nix-collect-garbage -d
+  '';
+in
+{
   # Home-manager 22.11 requires this be set. We never set it so we have
   # to use the old state version.
   home.stateVersion = "18.09";

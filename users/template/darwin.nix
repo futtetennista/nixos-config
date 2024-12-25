@@ -4,29 +4,31 @@
   launchd = {
     agents = {
       # TODO: this doesn't work
-      backup-data = {
+      backup-data-5 = {
         serviceConfig = {
           GroupName = "staff";
           InitGroups = true;
-          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_backup_data_1"];
+          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_backup_data"];
           RunAtLoad = true;
           StandardErrorPath = "/var/log/org.nixos.backup-data/agent.err";
           StandardOutPath = "/var/log/org.nixos.backup-data/agent.out";
           StartInterval = 3600;
         };
-      } ;
-      cleanup-docker =
+      };
+
+      cleanup-docker-1 = {
         serviceConfig = {
-          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_cleanup_docker_1"];
+          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_cleanup_docker"];
           RunAtLoad = true;
           StandardErrorPath = "/var/log/org.nixos.cleanup-docker/agent.err";
           StandardOutPath = "/var/log/org.nixos.cleanup-docker/agent.out";
           StartInterval = 86400;
         };
       };
-      cleanup-nix = {
+
+      cleanup-nix-1 = {
         serviceConfig = {
-          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_cleanup_nix_1"];
+          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_cleanup_nix"];
           RunAtLoad = true;
           StandardErrorPath = "/var/log/org.nixos.cleanup-nix/agent.err";
           StandardOutPath = "/var/log/org.nixos.cleanup-nix/agent.out";
@@ -137,10 +139,14 @@
   system.activationScripts.postActivation.text = builtins.readFile ./add_login_items.sh;
 
   system.defaults = {
-    dock.autohide = true;
-    dock.mru-spaces = false;
-    finder.AppleShowAllExtensions = true;
-    finder.FXPreferredViewStyle = "Nlsv";
+    dock = {
+      autohide = true;
+      mru-spaces = false;
+    };
+    finder = {
+      AppleShowAllExtensions = true;
+      FXPreferredViewStyle = "Nlsv";
+    };
     screencapture.location = "/Users/${currentSystemUser}/screenshots";
     trackpad = {
       Clicking = true;
