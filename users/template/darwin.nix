@@ -165,7 +165,8 @@
             "com.apple.dictionary.ODE"
             # Thesaurus English (UK)
             "com.apple.dictionary.OTE"
-            "com.apple.dictionary.wikipedia"
+            # /System/Library/Frameworks/CoreServices.framework/Frameworks/DictionaryServices.framework/Resources/Wikipedia.wikipediadictionary
+            "com.apple.dictionary.Wikipedia"
             "com.apple.dictionary.it.Devoto-Oli"
             "com.apple.dictionary.fr.Multi"
             "com.apple.dictionary.de.DDDSI"

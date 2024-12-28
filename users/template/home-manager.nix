@@ -78,6 +78,9 @@ let
     gt = "git tag";
   };
 
+  #---------------------------------------------------------------------
+  # Bespoke scripts
+  #---------------------------------------------------------------------
   scriptBackupData = pkgs.writeShellScriptBin "@@system.user@@_backup_data" (builtins.readFile ./backup_data);
   scriptCleanupDocker = pkgs.writeShellScriptBin "@@system.user@@_cleanup_docker" ''
     /etc/profiles/per-user/@@system.user@@/bin/docker system prune --force --volumes
@@ -249,6 +252,8 @@ in
   } // {
     # https://github.com/nix-community/nix-direnv?tab=readme-ov-file#via-home-manager
     enableBashIntegration = true;
+    enableFishIntegration = false;
+    enableZshIntegration = true;
     nix-direnv.enable = true;
   };
 
