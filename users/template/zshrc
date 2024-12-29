@@ -23,11 +23,11 @@ function is_same_checksum {
   actualChecksum=$(openssl dgst -sha1 $1 | awk '{print $2}')
 
   if [ $actualChecksum = $expectedChecksum ]; then
-    echo -e "${COLOR_GREEN}✅Checksums match${COLOR_PS_CLEAR}"
+    echo -e "${COLOR_GREEN}✅ Checksums match${COLOR_PS_CLEAR}"
     unset u
     exit 0
   else
-    echo -e "${COLOR_RED}❌Checksums don't match${COLOR_PS_CLEAR}"
+    echo -e "${COLOR_RED}❌ Checksums don't match${COLOR_PS_CLEAR}"
     unset u
     exit 1
   fi
@@ -72,4 +72,17 @@ function add_ssh_key {
   /usr/bin/ssh-add --apple-use-keychain @@ssh.key.path@@
 }
 
+function setup_aws_completions {
+  autoload bashcompinit && bashcompinit
+  autoload -Uz compinit && compinit
+  complete -C "$(which aws_completer)" aws
+}
+
+function setup_cdktf_completions {
+  source <(cdktf completion zsh)
+}
+
 add_ssh_key
+
+setup_aws_completions
+setup_cdktf_completions

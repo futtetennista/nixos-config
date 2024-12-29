@@ -104,10 +104,10 @@ in
   home.packages = [
     pkgs._1password-cli
     pkgs.asciinema
+    pkgs.awscli2
     pkgs.bat
     pkgs.cachix
     pkgs.curl
-    pkgs.docker
     pkgs.eza
     pkgs.fd
     pkgs.fzf
@@ -117,16 +117,15 @@ in
     pkgs.git-crypt
     pkgs.htop
     pkgs.jq
-    pkgs.nodejs
+    pkgs.nodejs_20
+    pkgs.nodePackages.cdktf-cli
     pkgs.npins
     pkgs.pre-commit
     pkgs.python312
     pkgs.ripgrep
-    # pkgs.sentry-cli
     pkgs.shellcheck
     pkgs.tree
     pkgs.watch
-    # pkgs.zigpkgs."0.13.0"
 
     scriptBackupData
     scriptCleanupDocker
@@ -141,6 +140,9 @@ in
     pkgs.valgrind
     pkgs.zathura
     pkgs.xfce.xfce4-terminal
+  ]) ++ (lib.optionals (!isDarwin) [
+    # Install "Docker for Mac" cask
+    pkgs.docker
   ]);
 
   #---------------------------------------------------------------------
@@ -221,17 +223,22 @@ in
     syntaxHighlighting.enable = true;
     # Called 3rd
     initExtraBeforeCompInit = ''
+      echo '[debug] initExtraBeforeCompInit'
     '';
     # Called 2nd
     initExtraFirst = ''
+      echo '[debug] initExtraInit'
     '';
     # Called 5th
     loginExtra = ''
+      echo '[debug] loginExtra'
     '';
     logoutExtra = ''
+      echo '[debug] logoutExtra'
     '';
     # Called 1st
     profileExtra = ''
+      echo '[debug] profileExtra'
     '';
 
     inherit shellAliases;

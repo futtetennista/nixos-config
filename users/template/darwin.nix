@@ -1,4 +1,12 @@
-{ currentSystemUser, currentSystemOSVersion, currentSystemDisplaySize, currentSystemHasBiometricSupport, inputs, lib, pkgs, ... }:
+{ currentSystemUser,
+  currentSystemOSVersion,
+  currentSystemDisplaySize,
+  currentSystemHasBiometricSupport,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   launchd = {
@@ -10,8 +18,8 @@
           InitGroups = true;
           ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_backup_data"];
           RunAtLoad = true;
-          StandardErrorPath = "/var/log/org.nixos.backup-data/agent.err";
-          StandardOutPath = "/var/log/org.nixos.backup-data/agent.out";
+          StandardErrorPath = "/var/log/org.nixos.backup-data/stderr.log";
+          StandardOutPath = "/var/log/org.nixos.backup-data/stdout.log";
           StartInterval = 3600;
         };
       };
@@ -20,8 +28,8 @@
         serviceConfig = {
           ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_cleanup_docker"];
           RunAtLoad = true;
-          StandardErrorPath = "/var/log/org.nixos.cleanup-docker/agent.err";
-          StandardOutPath = "/var/log/org.nixos.cleanup-docker/agent.out";
+          StandardErrorPath = "/var/log/org.nixos.cleanup-docker/stderr.log";
+          StandardOutPath = "/var/log/org.nixos.cleanup-docker/stdout.log";
           StartInterval = 86400;
         };
       };
@@ -30,11 +38,24 @@
         serviceConfig = {
           ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_cleanup_nix"];
           RunAtLoad = true;
-          StandardErrorPath = "/var/log/org.nixos.cleanup-nix/agent.err";
-          StandardOutPath = "/var/log/org.nixos.cleanup-nix/agent.out";
+          StandardErrorPath = "/var/log/org.nixos.cleanup-nix/stderr.log";
+          StandardOutPath = "/var/log/org.nixos.cleanup-nix/stdout.log";
           StartInterval = 604800;
         };
       };
+
+      # docker = {
+      #   serviceConfig = {
+      #     Label = "com.docker.docker";
+      #     ProgramArguments = [
+      #       "/Applications/Docker.app/Contents/MacOS/Docker"
+      #     ];
+      #     KeepAlive = true;
+      #     RunAtLoad = true;
+      #     StandardErrorPath = "/var/log/com.docker.docker/stderr.log";
+      #     StandardOutPath = "/var/log/com.docker.docker/sdtout.log";
+      #   };
+      # };
     };
   };
 
@@ -77,6 +98,10 @@
       }
       "discord"
       {
+        name = "docker";
+        args = { require_sha = true; };
+      }
+      {
         name = "firefox";
         args = { require_sha = true; };
       }
@@ -85,7 +110,10 @@
         args = { require_sha = true; };
       }
       "google-chrome"
-      "gpg-suite"
+      {
+        name = "gpg-suite";
+        args = { require_sha = true; };
+      }
       {
         name = "openoffice";
         args = { require_sha = true; };
@@ -107,7 +135,10 @@
         name = "visual-studio-code";
         args = { require_sha = true; };
       }
-      "zoom"
+      {
+        name = "zoom";
+        args = { require_sha = true; };
+      }
     ] ++ (if lib.toInt currentSystemOSVersion > 12 then [
       {
         name = "proton-drive";
@@ -125,7 +156,7 @@
     };
 
     onActivation = {
-      autoUpdate = true;
+      autoUpdate = false;
       extraFlags = [
         "--verbose"
       ];
