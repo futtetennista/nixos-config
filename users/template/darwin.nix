@@ -136,6 +136,10 @@
         args = { require_sha = true; };
       }
       {
+        name = "vlc";
+        args = { require_sha = true; };
+      }
+      {
         name = "zoom";
         args = { require_sha = true; };
       }
