@@ -384,6 +384,7 @@ in
       scala-lang.scala
       scalameta.metals
       sjurmillidahl.ormolu-vscode
+      tomoki1207.pdf
       vscodevim.vim
     ];
   };
