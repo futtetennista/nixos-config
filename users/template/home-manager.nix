@@ -361,10 +361,12 @@ in
       github.vscode-pull-request-github
       hashicorp.terraform
       haskell.haskell
+      jebbs.plantuml
       justusadam.language-haskell
       mathiasfrohlich.kotlin
       ms-azuretools.vscode-docker
       ms-kubernetes-tools.vscode-kubernetes-tools
+      ms-pyright.pyright
       ms-python.debugpy
       ms-python.isort
       ms-python.python
