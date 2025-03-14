@@ -91,9 +91,13 @@
       # "alfred"
       "anki"
       # "cleanshot"
-      "calibre"
       {
         name = "blackhole-2ch";
+        args = { require_sha = true; };
+      }
+      "calibre"
+      {
+        name = "cursor";
         args = { require_sha = true; };
       }
       "discord"
