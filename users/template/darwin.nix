@@ -119,6 +119,10 @@
         args = { require_sha = true; };
       }
       {
+        name = "lm-studio";
+        args = { require_sha = true; };
+      }
+      {
         name = "openoffice";
         args = { require_sha = true; };
       }
