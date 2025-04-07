@@ -123,6 +123,10 @@
         args = { require_sha = true; };
       }
       {
+        name = "ollama";
+        args = { require_sha = true; };
+      }
+      {
         name = "openoffice";
         args = { require_sha = true; };
       }
