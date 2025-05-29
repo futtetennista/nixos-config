@@ -118,7 +118,7 @@ in
     pkgs.htop
     pkgs.jq
     pkgs.nodejs_20
-    pkgs.nodePackages.cdktf-cli
+    # pkgs.nodePackages.cdktf-cli
     pkgs.npins
     pkgs.pre-commit
     pkgs.python312
@@ -213,8 +213,8 @@ in
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    # Called 4th
-    initExtra = builtins.readFile ./zshrc;
+    # Called 2nd
+    initContent = builtins.readFile ./zshrc;
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" ];
@@ -222,14 +222,6 @@ in
     };
     syntaxHighlighting.enable = true;
     # Called 3rd
-    initExtraBeforeCompInit = ''
-      echo '[debug] initExtraBeforeCompInit'
-    '';
-    # Called 2nd
-    initExtraFirst = ''
-      echo '[debug] initExtraInit'
-    '';
-    # Called 5th
     loginExtra = ''
       echo '[debug] loginExtra'
     '';
@@ -338,57 +330,59 @@ in
 
   programs.vscode = {
     enable = true;
-    userSettings = builtins.fromJSON (builtins.readFile ./vscode-settings.json);
-    extensions = with pkgs.vscode-extensions; [
-      # arcanis.vscode-zipfs
-      # googlecloudtools.cloudcode
-      # jcanero.hoogle-vscode
-      # lextudio.restructuredtext
-      # mathematic.vscode-pdf
-      # ms-ossdata.vscode-postgresql
-      # ms-vscode.remote-explorer
-      # trond-snekvik.simple-rst
-      # visortelle.haskell-spotlight
-      _1password.op-vscode
-      bbenoist.nix
-      bierner.markdown-mermaid
-      dbaeumer.vscode-eslint
-      eamodio.gitlens
-      esbenp.prettier-vscode
-      github.copilot
-      github.copilot-chat
-      github.vscode-github-actions
-      github.vscode-pull-request-github
-      hashicorp.terraform
-      haskell.haskell
-      jebbs.plantuml
-      justusadam.language-haskell
-      mathiasfrohlich.kotlin
-      ms-azuretools.vscode-docker
-      ms-kubernetes-tools.vscode-kubernetes-tools
-      ms-pyright.pyright
-      ms-python.debugpy
-      ms-python.isort
-      ms-python.python
-      ms-python.vscode-pylance
-      ms-toolsai.jupyter
-      ms-toolsai.jupyter-keymap
-      ms-toolsai.jupyter-renderers
-      ms-toolsai.vscode-jupyter-cell-tags
-      ms-toolsai.vscode-jupyter-slideshow
-      ms-vscode-remote.remote-containers
-      ms-vscode-remote.remote-ssh
-      ms-vscode-remote.remote-ssh-edit
-      ms-vscode.live-server
-      ms-vscode.makefile-tools
-      redhat.vscode-yaml
-      reditorsupport.r
-      scala-lang.scala
-      scalameta.metals
-      sjurmillidahl.ormolu-vscode
-      tomoki1207.pdf
-      vscodevim.vim
-    ];
+    profiles.default = {
+      userSettings = builtins.fromJSON (builtins.readFile ./vscode-settings.json);
+      extensions = with pkgs.vscode-extensions; [
+        # arcanis.vscode-zipfs
+        # googlecloudtools.cloudcode
+        # jcanero.hoogle-vscode
+        # lextudio.restructuredtext
+        # mathematic.vscode-pdf
+        # ms-ossdata.vscode-postgresql
+        # ms-vscode.remote-explorer
+        # trond-snekvik.simple-rst
+        # visortelle.haskell-spotlight
+        _1password.op-vscode
+        bbenoist.nix
+        bierner.markdown-mermaid
+        dbaeumer.vscode-eslint
+        eamodio.gitlens
+        esbenp.prettier-vscode
+        github.copilot
+        github.copilot-chat
+        github.vscode-github-actions
+        github.vscode-pull-request-github
+        hashicorp.terraform
+        haskell.haskell
+        jebbs.plantuml
+        justusadam.language-haskell
+        mathiasfrohlich.kotlin
+        ms-azuretools.vscode-docker
+        ms-kubernetes-tools.vscode-kubernetes-tools
+        ms-pyright.pyright
+        ms-python.debugpy
+        ms-python.isort
+        ms-python.python
+        ms-python.vscode-pylance
+        ms-toolsai.jupyter
+        ms-toolsai.jupyter-keymap
+        ms-toolsai.jupyter-renderers
+        ms-toolsai.vscode-jupyter-cell-tags
+        ms-toolsai.vscode-jupyter-slideshow
+        ms-vscode-remote.remote-containers
+        ms-vscode-remote.remote-ssh
+        ms-vscode-remote.remote-ssh-edit
+        ms-vscode.live-server
+        ms-vscode.makefile-tools
+        redhat.vscode-yaml
+        reditorsupport.r
+        scala-lang.scala
+        scalameta.metals
+        sjurmillidahl.ormolu-vscode
+        tomoki1207.pdf
+        vscodevim.vim
+      ];
+    };
   };
 
   programs.tmux = {
@@ -444,7 +438,7 @@ in
 
   services.gpg-agent = {
     enable = isLinux;
-    pinentryPackage = pkgs.pinentry-tty;
+    pinentry.package = pkgs.pinentry-tty;
 
     # cache the keys forever so we don't get asked for a password
     defaultCacheTtl = 31536000;
