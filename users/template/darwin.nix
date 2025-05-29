@@ -185,8 +185,6 @@
   # nix-darwin doesn't expose any API for this, so we have to do it manually.
   system.activationScripts.postActivation.text = builtins.readFile ./add_login_items.sh;
 
-  system.primaryUser = "@@system.user@@";
-
   system.defaults = {
     dock = {
       autohide = true;
