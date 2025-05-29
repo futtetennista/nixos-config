@@ -180,7 +180,7 @@
     };
   };
 
-  security.pam.enableSudoTouchIdAuth = currentSystemHasBiometricSupport;
+  security.pam.services.sudo_local.touchIdAuth = currentSystemHasBiometricSupport;
 
   # nix-darwin doesn't expose any API for this, so we have to do it manually.
   system.activationScripts.postActivation.text = builtins.readFile ./add_login_items.sh;
