@@ -21,8 +21,8 @@ in {
     # this, use your own, or toss it. Its typically safe to use a binary cache
     # since the data inside is checksummed.
     settings = {
-      extra-substituters = ["@@nixCache.url@@"];
-      extra-trusted-public-keys = ["@@nixCache.publicKey@@"];
+      extra-substituters = [];
+      extra-trusted-public-keys = [];
     };
   };
 

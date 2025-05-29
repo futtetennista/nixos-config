@@ -40,14 +40,10 @@
     }
   },
   "required": [
-    "@@backups.passwords.bear@@",
     "@@github.user@@",
     "@@networking.computerNamePrefix@@",
-    "@@nixCache.publicKey@@",
-    "@@nixCache.url@@",
     "@@programs.git.userEmail@@",
     "@@programs.git.userName@@",
-    "@@proton.email@@",
     "@@ssh.key.path@@",
     "@@system.user@@",
     "@@user.signingKey@@"

@@ -127,7 +127,7 @@ in
     pkgs.tree
     pkgs.watch
 
-    scriptBackupData
+    # scriptBackupData
     scriptCleanupDocker
     scriptCleanupNix
   ] ++ (lib.optionals isDarwin [
