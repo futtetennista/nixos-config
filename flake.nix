@@ -114,7 +114,7 @@
       osVersion = "15";
       user = "@@system.user@@";
       year = 2024;
-      casks = builtins.fromJSON (builtins.readFile ./casks-default.json);
+      casks = builtins.fromJSON (builtins.readFile ./casks-work.json);
     };
   };
 }
