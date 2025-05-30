@@ -6,7 +6,7 @@
     "@@backups.passwords.bear@@": {
       "type": "string"
     },
-    "@@networking.computerNamePrefix@@": {
+    "@@networking.computerName@@": {
       "type": "string"
     },
     "@@programs.git.userName@@": {
@@ -41,7 +41,7 @@
   },
   "required": [
     "@@github.user@@",
-    "@@networking.computerNamePrefix@@",
+    "@@networking.computerName@@",
     "@@programs.git.userEmail@@",
     "@@programs.git.userName@@",
     "@@ssh.key.path@@",

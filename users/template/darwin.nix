@@ -61,9 +61,9 @@
   };
 
   networking = {
-    computerName = "@@networking.computerNamePrefix@@${builtins.substring 0 2 currentSystemDisplaySize}";
-    localHostName = "@@networking.computerNamePrefix@@${builtins.substring 0 2 currentSystemDisplaySize}";
-    hostName = "@@networking.computerNamePrefix@@${builtins.substring 0 2 currentSystemDisplaySize}";
+    computerName = "@@networking.computerName@@";
+    localHostName = "@@networking.computerName@@";
+    hostName = "@@networking.computerName@@";
   };
 
   # https://github.com/LnL7/nix-darwin/issues/145
