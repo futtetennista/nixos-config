@@ -26,7 +26,7 @@ NIXUSER ?= futtetennista
 
 switch: switch_darwin.sh switch_other.sh
 ifeq ($(UNAME), Darwin)
-	@./switch_darwin.sh && $(MAKE) cleanup && on_success || (code=$$?; $(MAKE) cleanup; exit $$code)
+	@./switch_darwin.sh && $(MAKE) cleanup && $(MAKE) on_success || (code=$$?; $(MAKE) cleanup; exit $$code)
 else
 	@./switch_other.sh && $(MAKE) cleanup || (code=$$?; $(MAKE) cleanup; exit $$code)
 endif
@@ -51,7 +51,7 @@ switch_darwin.sh:
 switch_other.sh:
 	@echo '#!/usr/bin/env bash' > $@
 	@echo 'set -euo pipefail' >> $@
-	@echo './replace_secrets.sh$(DIFF_FILE)' >> $@
+	@echo './replace_secrets.sh $(DIFF_FILE)' >> $@
 	@echo 'sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#$(NIXNAME)"' >> $@
 	@chmod +x $@
 
