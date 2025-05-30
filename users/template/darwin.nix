@@ -12,17 +12,17 @@
   launchd = {
     agents = {
       # TODO: this doesn't work
-      backup-data-5 = {
-        serviceConfig = {
-          GroupName = "staff";
-          InitGroups = true;
-          ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_backup_data"];
-          RunAtLoad = true;
-          StandardErrorPath = "/var/log/org.nixos.backup-data/stderr.log";
-          StandardOutPath = "/var/log/org.nixos.backup-data/stdout.log";
-          StartInterval = 3600;
-        };
-      };
+      # backup-data-5 = {
+      #   serviceConfig = {
+      #     GroupName = "staff";
+      #     InitGroups = true;
+      #     ProgramArguments = ["/etc/profiles/per-user/@@system.user@@/bin/@@system.user@@_backup_data"];
+      #     RunAtLoad = true;
+      #     StandardErrorPath = "/var/log/org.nixos.backup-data/stderr.log";
+      #     StandardOutPath = "/var/log/org.nixos.backup-data/stdout.log";
+      #     StartInterval = 3600;
+      #   };
+      # };
 
       cleanup-docker-1 = {
         serviceConfig = {
