@@ -26,10 +26,14 @@ NIXUSER ?= futtetennista
 
 switch: switch_darwin.sh switch_other.sh
 ifeq ($(UNAME), Darwin)
-	@./switch_darwin.sh && $(MAKE) cleanup || (code=$$?; $(MAKE) cleanup; exit $$code)
+	@./switch_darwin.sh && $(MAKE) cleanup && on_success || (code=$$?; $(MAKE) cleanup; exit $$code)
 else
 	@./switch_other.sh && $(MAKE) cleanup || (code=$$?; $(MAKE) cleanup; exit $$code)
 endif
+
+on_success:
+	@echo "Successfully switched to $(NIXNAME)"
+	@echo "⚠️ You might need to restart your computer or log out and login again to apply some changes"
 
 cleanup:
 	@echo '[cleanup] Removing temporary files and reverting secrets'
