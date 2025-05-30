@@ -88,7 +88,7 @@
       year = 2014;
     };
 
-    darwinConfigurations.macbook-pro-m1 = mkSystem "macbook-pro-m1" {
+    darwinConfigurations.macbook-pro-mx = mkSystem "macbook-pro-mx" {
       biometricSupport = true;
       darwin = true;
       displaySize = "16-inch";

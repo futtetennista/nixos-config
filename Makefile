@@ -20,7 +20,7 @@ ARCH := $(shell arch)
 ifeq ($(ARCH), i386)
 	NIXNAME ?= macbook-pro-intel
 else
-	NIXNAME ?= macbook-pro-m1
+	NIXNAME ?= macbook-pro-mx
 endif
 NIXUSER ?= futtetennista
 
