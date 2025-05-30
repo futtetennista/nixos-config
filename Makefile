@@ -41,7 +41,7 @@ switch_darwin.sh:
 	@echo 'set -euo pipefail' >> $@
 	@echo './replace_secrets.sh $(DIFF_FILE)' >> $@
 	@echo 'nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.$(NIXNAME).system"' >> $@
-	@echo './result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#$(NIXNAME)"' >> $@
+	@echo 'sudo ./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#$(NIXNAME)"' >> $@
 	@chmod +x $@
 
 switch_other.sh:
@@ -66,7 +66,7 @@ test_darwin.sh:
 	@echo 'set -euo pipefail' >> $@
 	@echo './replace_secrets.sh $(DIFF_FILE)' >> $@
 	@echo 'nix --extra-experimental-features nix-command --extra-experimental-features flakes build ".#darwinConfigurations.$(NIXNAME).system"' >> $@
-	@echo './result/sw/bin/darwin-rebuild check --flake "$$(pwd)#$(NIXNAME)"' >> $@
+	@echo 'sudo ./result/sw/bin/darwin-rebuild check --flake "$$(pwd)#$(NIXNAME)"' >> $@
 	@chmod +x $@
 
 test_other.sh:
