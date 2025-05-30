@@ -15,6 +15,15 @@
 
   # Keep in async with vm-shared.nix. (todo: pull this out into a file)
   nix = {
+    # Determinate uses its own daemon to manage the Nix installation that
+    # conflicts with nix-darwin’s native Nix management.
+    # To turn off nix-darwin’s management of the Nix installation.
+    # This will allow you to use nix-darwin with Determinate. Some nix-darwin
+    # functionality that relies on managing the Nix installation, like the
+    # `nix.*` options to adjust Nix settings or configure a Linux builder,
+    # will be unavailable.
+    enable = false;
+
     # We need to enable flakes
     extraOptions = ''
       experimental-features = nix-command flakes
