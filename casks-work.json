@@ -1,0 +1,59 @@
+[
+  {
+    "name": "1password",
+    "args": { "require_sha": true }
+  },
+  {
+    "name": "appcleaner",
+    "args": { "require_sha": true }
+  },
+  {
+    "name": "cursor",
+    "args": { "require_sha": true }
+  },
+  {
+    "name": "docker",
+    "args": { "require_sha": true }
+  },
+  {
+    "name": "firefox",
+    "args": { "require_sha": true }
+  },
+  {
+    "name": "flux",
+    "args": { "require_sha": true }
+  },
+  "google-chrome",
+  {
+    "name": "gpg-suite",
+    "args": { "require_sha": true }
+  },
+  {
+    "name": "lm-studio",
+    "args": { "require_sha": true }
+  },
+  {
+    "name": "ollama",
+    "args": { "require_sha": true }
+  },
+  {
+    "name": "raycast",
+    "args": { "require_sha": true }
+  },
+  {
+    "name": "rectangle",
+    "args": { "require_sha": true }
+  },
+  {
+    "name": "slack",
+    "args": { "require_sha": true }
+  },
+  {
+    "name": "visual-studio-code",
+    "args": { "require_sha": true }
+  },
+  {
+    "name": "zoom",
+    "args": { "require_sha": true }
+  }
+]

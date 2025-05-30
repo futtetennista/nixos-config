@@ -2,6 +2,7 @@
   currentSystemOSVersion,
   currentSystemDisplaySize,
   currentSystemHasBiometricSupport,
+  currentSystemCasks,
   inputs,
   lib,
   pkgs,
@@ -79,88 +80,8 @@
 
   homebrew = {
     enable = true;
-    casks  = [
-      {
-        name = "1password";
-        args = { require_sha = true; };
-      }
-      {
-        name = "appcleaner";
-        args = { require_sha = true; };
-      }
-      # "alfred"
-      "anki"
-      # "cleanshot"
-      {
-        name = "blackhole-2ch";
-        args = { require_sha = true; };
-      }
-      "calibre"
-      {
-        name = "cursor";
-        args = { require_sha = true; };
-      }
-      "discord"
-      {
-        name = "docker";
-        args = { require_sha = true; };
-      }
-      {
-        name = "firefox";
-        args = { require_sha = true; };
-      }
-      {
-        name = "flux";
-        args = { require_sha = true; };
-      }
-      "google-chrome"
-      {
-        name = "gpg-suite";
-        args = { require_sha = true; };
-      }
-      {
-        name = "lm-studio";
-        args = { require_sha = true; };
-      }
-      {
-        name = "ollama";
-        args = { require_sha = true; };
-      }
-      {
-        name = "openoffice";
-        args = { require_sha = true; };
-      }
-      {
-        name = "raycast";
-        args = { require_sha = true; };
-      }
-      {
-        name = "rectangle";
-        args = { require_sha = true; };
-      }
-      {
-        name = "slack";
-        args = { require_sha = true; };
-      }
-      "spotify"
-      {
-        name = "visual-studio-code";
-        args = { require_sha = true; };
-      }
-      {
-        name = "vlc";
-        args = { require_sha = true; };
-      }
-      {
-        name = "zoom";
-        args = { require_sha = true; };
-      }
-    ] ++ (if lib.toInt currentSystemOSVersion > 12 then [
-      {
-        name = "proton-drive";
-        args = { require_sha = true; };
-      }
-    ] else []);
+
+    casks = currentSystemCasks;
 
     masApps = {
       "1Password for Safari" = 1569813296;

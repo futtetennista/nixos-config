@@ -11,7 +11,8 @@ name:
   system,
   user,
   wsl ? false,
-  year
+  year,
+  casks
 }:
 
 let
@@ -66,6 +67,7 @@ in systemFunc rec {
         currentSystemHasBiometricSupport = biometricSupport;
         currentSystemDisplaySize = displaySize;
         currentSystemProductionYear = year;
+        currentSystemCasks = casks;
       };
     }
   ];

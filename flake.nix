@@ -86,6 +86,7 @@
       osVersion = "12";
       user = "@@system.user@@";
       year = 2014;
+      casks = builtins.fromJSON (builtins.readFile ./casks-default.json);
     };
 
     darwinConfigurations.macbook-pro-mx = mkSystem "macbook-pro-mx" {
@@ -96,6 +97,24 @@
       osVersion = "15";
       user = "@@system.user@@";
       year = 2023;
+      casks = builtins.fromJSON (builtins.readFile ./casks-default.json) ++ 
+        [
+          {
+            name = "proton-drive";
+            args = { require_sha = true; };
+          }
+        ];
+    };
+    
+    darwinConfigurations.macbook-pro-mx-work = mkSystem "macbook-pro-mx-work" {
+      biometricSupport = true;
+      darwin = true;
+      displaySize = "16-inch";
+      system = "aarch64-darwin";
+      osVersion = "15";
+      user = "@@system.user@@";
+      year = 2024;
+      casks = builtins.fromJSON (builtins.readFile ./casks-default.json);
     };
   };
 }
