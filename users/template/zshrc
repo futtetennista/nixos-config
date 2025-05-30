@@ -79,7 +79,9 @@ function setup_aws_completions {
 }
 
 function setup_cdktf_completions {
-  source <(cdktf completion zsh)
+  if command -v cdktf &> /dev/null; then
+    source <(cdktf completion zsh)
+  fi
 }
 
 add_ssh_key
