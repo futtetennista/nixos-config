@@ -20,8 +20,6 @@
 
 \set AUTOCOMMIT off
 
-\set --single-transaction
-
 -- In interactive transactions, allow recovery after errors within
 -- transactions. In non-interactive transactions - e.g. those in piped
 -- input - do not.
