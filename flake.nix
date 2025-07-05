@@ -97,7 +97,7 @@
       osVersion = "15";
       user = "@@system.user@@";
       year = 2023;
-      casks = builtins.fromJSON (builtins.readFile ./casks-default.json) ++ 
+      casks = builtins.fromJSON (builtins.readFile ./casks-default.json) ++
         [
           {
             name = "proton-drive";
@@ -105,11 +105,11 @@
           }
         ];
     };
-    
+
     darwinConfigurations.macbook-pro-mx-work = mkSystem "macbook-pro-mx-work" {
       biometricSupport = true;
       darwin = true;
-      displaySize = "16-inch";
+      displaySize = "14-inch";
       system = "aarch64-darwin";
       osVersion = "15";
       user = "@@system.user@@";

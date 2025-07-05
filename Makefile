@@ -18,9 +18,9 @@ UNAME := $(shell uname)
 ARCH := $(shell arch)
 
 ifeq ($(ARCH), i386)
-	NIXNAME ?= macbook-pro-intel
+	NIXSYSNAME ?= macbook-pro-intel
 else
-	NIXNAME ?= macbook-pro-mx
+	NIXSYSNAME ?= macbook-pro-mx
 endif
 NIXUSER ?= futtetennista
 
@@ -32,7 +32,7 @@ else
 endif
 
 on_success:
-	@echo "Successfully switched to $(NIXNAME)"
+	@echo "Successfully switched to $(NIXSYSNAME)"
 	@echo "⚠️ You might need to restart your computer or log out and login again to apply some changes"
 
 cleanup:
@@ -43,17 +43,16 @@ cleanup:
 switch_darwin.sh:
 	@echo '#!/usr/bin/env bash' > $@
 	@echo 'set -euo pipefail' >> $@
-	@echo ./validate_config.sh >> $ @
 	@echo './replace_secrets.sh $(DIFF_FILE)' >> $@
-	@echo 'nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.$(NIXNAME).system"' >> $@
-	@echo 'sudo ./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#$(NIXNAME)"' >> $@
+	@echo 'nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.$(NIXSYSNAME).system"' >> $@
+	@echo 'sudo ./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#$(NIXSYSNAME)"' >> $@
 	@chmod +x $@
 
 switch_other.sh:
 	@echo '#!/usr/bin/env bash' > $@
 	@echo 'set -euo pipefail' >> $@
 	@echo './replace_secrets.sh $(DIFF_FILE)' >> $@
-	@echo 'sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#$(NIXNAME)"' >> $@
+	@echo 'sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#$(NIXSYSNAME)"' >> $@
 	@chmod +x $@
 
 check:
@@ -70,15 +69,15 @@ test_darwin.sh:
 	@echo '#!/usr/bin/env bash' > $@
 	@echo 'set -euo pipefail' >> $@
 	@echo './replace_secrets.sh $(DIFF_FILE)' >> $@
-	@echo 'nix --extra-experimental-features nix-command --extra-experimental-features flakes build ".#darwinConfigurations.$(NIXNAME).system"' >> $@
-	@echo 'sudo ./result/sw/bin/darwin-rebuild check --flake "$$(pwd)#$(NIXNAME)"' >> $@
+	@echo 'nix --extra-experimental-features nix-command --extra-experimental-features flakes build ".#darwinConfigurations.$(NIXSYSNAME).system"' >> $@
+	@echo 'sudo ./result/sw/bin/darwin-rebuild check --flake "$$(pwd)#$(NIXSYSNAME)"' >> $@
 	@chmod +x $@
 
 test_other.sh:
 	@echo '#!/usr/bin/env bash' > $@
 	@echo 'set -euo pipefail' >> $@
 	@echo './replace_secrets.sh $(DIFF_FILE)' >> $@
-	@echo 'sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild check --flake ".#$(NIXNAME)"' >> $@
+	@echo 'sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild check --flake ".#$(NIXSYSNAME)"' >> $@
 	@chmod +x $@
 
 # This builds the given NixOS configuration and pushes the results to the
@@ -86,7 +85,7 @@ test_other.sh:
 # cachix authentication to be configured out of band.
 cache:
 	./replace_secrets.sh /tmp/replace_secrets.diff
-	nix build '.#nixosConfigurations.$(NIXNAME).config.system.build.toplevel' --json \
+	nix build '.#nixosConfigurations.$(NIXSYSNAME).config.system.build.toplevel' --json \
 		| jq -r '.[].outputs | to_entries[].value' \
 		| cachix push ${NIXCACHE}
 	git apply -R /tmp/replace_secrets.diff
@@ -164,7 +163,7 @@ vm/copy:
 # have to run vm/copy before.
 vm/switch:
 	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
-		sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake \"/nix-config#$(NIXNAME)\" \
+		sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake \"/nix-config#$(NIXSYSNAME)\" \
 	"
 
 # Build a WSL installer
