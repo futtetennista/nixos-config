@@ -39,6 +39,15 @@ let
     };
   };
 
+  ms-playwright.playwright = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      name = "playwright";
+      hash = "sha256-jbMgEzogc/rZskV7WbxRYfCeIKAcZS2ZMPEdO4jAotk=";
+      publisher = "ms-playwright";
+      version = "1.1.7";
+    };
+  };
+
   #---------------------------------------------------------------------
   # Tmux plugins not available in nixpkgs
   #---------------------------------------------------------------------
@@ -365,7 +374,7 @@ in
         ms-python.flake8
         ms-python.isort
         ms-python.mypy-type-checker
-        ms-playwright.play
+        ms-playwright.playwright
         ms-python.python
         ms-python.vscode-pylance
         ms-toolsai.jupyter
