@@ -37,3 +37,5 @@
 \timing
 
 -- \set intervalstyle to 'postgres_verbose'
+
+\x auto

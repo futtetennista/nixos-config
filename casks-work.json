@@ -4,6 +4,10 @@
     "args": { "require_sha": true }
   },
   {
+    "name": "1password",
+    "args": { "require_sha": true }
+  },
+  {
     "name": "appcleaner",
     "args": { "require_sha": true }
   },
@@ -12,7 +16,7 @@
     "args": { "require_sha": true }
   },
   {
-    "name": "docker",
+    "name": "docker-desktop",
     "args": { "require_sha": true }
   },
   {
@@ -20,7 +24,7 @@
     "args": { "require_sha": true }
   },
   {
-    "name": "flux",
+    "name": "flux-app",
     "args": { "require_sha": true }
   },
   "google-chrome",
@@ -33,7 +37,7 @@
     "args": { "require_sha": true }
   },
   {
-    "name": "ollama",
+    "name": "ollama-app",
     "args": { "require_sha": true }
   },
   {

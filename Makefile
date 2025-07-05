@@ -43,6 +43,7 @@ cleanup:
 switch_darwin.sh:
 	@echo '#!/usr/bin/env bash' > $@
 	@echo 'set -euo pipefail' >> $@
+	@echo ./validate_config.sh >> $ @
 	@echo './replace_secrets.sh $(DIFF_FILE)' >> $@
 	@echo 'nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.$(NIXNAME).system"' >> $@
 	@echo 'sudo ./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#$(NIXNAME)"' >> $@

@@ -360,8 +360,12 @@ in
         ms-azuretools.vscode-docker
         ms-kubernetes-tools.vscode-kubernetes-tools
         ms-pyright.pyright
+        ms-python.black-formatter
         ms-python.debugpy
+        ms-python.flake8
         ms-python.isort
+        ms-python.mypy-type-checker
+        ms-playwright.play
         ms-python.python
         ms-python.vscode-pylance
         ms-toolsai.jupyter
