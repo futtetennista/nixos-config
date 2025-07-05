@@ -4,10 +4,6 @@
     "args": { "require_sha": true }
   },
   {
-    "name": "1password",
-    "args": { "require_sha": true }
-  },
-  {
     "name": "appcleaner",
     "args": { "require_sha": true }
   },
@@ -50,10 +46,6 @@
   },
   {
     "name": "slack",
-    "args": { "require_sha": true }
-  },
-  {
-    "name": "visual-studio-code",
     "args": { "require_sha": true }
   },
   {
