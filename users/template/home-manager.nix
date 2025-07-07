@@ -341,6 +341,7 @@ in
     enable = true;
     profiles.default = {
       userSettings = builtins.fromJSON (builtins.readFile ./vscode-settings.json);
+      keybindings = builtins.fromJSON (builtins.readFile ./vscode-keybindings.json);
       extensions = with pkgs.vscode-extensions; [
         # arcanis.vscode-zipfs
         # googlecloudtools.cloudcode
