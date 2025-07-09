@@ -24,11 +24,11 @@
     "args": "terminateAll"
   },
   {
-    "key": "cmd+a cmd+m",
+    "key": "cmd+r cmd+m",
     "command": "workbench.action.toggleMaximizedPanel"
   },
   {
-    "key": "cmd+a cmd+e",
+    "key": "cmd+r cmd+e",
     "command": "workbench.action.toggleEditorWidths"
   },
   {
