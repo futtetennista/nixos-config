@@ -231,16 +231,16 @@ in
     };
     syntaxHighlighting.enable = true;
     # Called 3rd
-    loginExtra = ''
-      echo '[debug] loginExtra'
-    '';
-    logoutExtra = ''
-      echo '[debug] logoutExtra'
-    '';
-    # Called 1st
-    profileExtra = ''
-      echo '[debug] profileExtra'
-    '';
+    # loginExtra = ''
+    #   echo '[debug] loginExtra'
+    # '';
+    # logoutExtra = ''
+    #   echo '[debug] logoutExtra'
+    # '';
+    # # Called 1st
+    # profileExtra = ''
+    #   echo '[debug] profileExtra'
+    # '';
 
     inherit shellAliases;
   };
