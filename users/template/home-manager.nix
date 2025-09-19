@@ -74,17 +74,23 @@ let
   ''));
 
   shellAliases = {
-    gut = "git";
-    gti = "git";
-    ga = "git add";
-    gc = "git commit";
+    # Show stats for the current branch compared to origin/HEAD
+    ga = "git add -p";
+    gaa = "git add -A";
+    gc = "git commit -m";
+    gca = "git commit --amend";
     gco = "git checkout";
     gcp = "git cherry-pick";
     gd = "git diff";
+    gdc = "git diff --cached";
+    gds = "git diff --stat origin/$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@')";
     gl = "git prettylog";
     gp = "git push";
+    gpf = "git push --force-with-lease";
     gs = "git status";
     gt = "git tag";
+    gti = "git";
+    gut = "git";
   };
 
   #---------------------------------------------------------------------
@@ -271,19 +277,21 @@ in
     userEmail = "@@programs.git.userEmail@@";
     aliases = {
       amend = "commit --amend";
+      cleanup = "!git branch --merged | grep  -v '\\*\\|main\\|develop' | xargs -n 1 -r git branch -d";
       cm = "commit -m";
       co = "checkout";
+      diffstage = "diff --staged";
+      diffstat = "diff --stat origin/$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@')";
+      h = "log -p --follow"; # Invoke it like this: git h -- <file>
+      history = "log -p --follow";
       po = "push origin";
       pr = "pull -r -p";
+      prettylog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+      root = "rev-parse --show-toplevel";
       s = "status";
       size = "count-objects -vH";
       undo = "reset HEAD~";
       zip = "!__zip() { git archive --format=zip --output=\"$(basename \"$PWD\").zip\" HEAD; }; __zip";
-      cleanup = "!git branch --merged | grep  -v '\\*\\|main\\|develop' | xargs -n 1 -r git branch -d";
-      # Invoke it like this: git h -- <file>
-      h = "log -p --follow";
-      prettylog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
-      root = "rev-parse --show-toplevel";
     };
     extraConfig = {
       branch.autosetuprebase = "always";
