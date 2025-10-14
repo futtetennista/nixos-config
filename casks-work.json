@@ -33,6 +33,10 @@
     "args": { "require_sha": true }
   },
   {
+    "name": "nx",
+    "args": { "require_sha": true }
+  },
+  {
     "name": "ollama-app",
     "args": { "require_sha": true }
   },
