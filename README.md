@@ -67,7 +67,7 @@ $ git-crypt unlock <key>
 
 in the "new" machine.
 
-Finally, clone this repo and run `make`. Provide the `NIXNAME` and
+Finally, clone this repo and run `make`. Provide the `NIXSYSNAME` and
 `NIXUSER` if the default values don't suit you. If there are any errors,
 follow the error message (some folders may need permissions changed,
 some files may need to be deleted).
