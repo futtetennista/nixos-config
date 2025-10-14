@@ -83,6 +83,10 @@
 
     casks = currentSystemCasks;
 
+    brews = [
+      "nx"
+    ];
+
     masApps = {
       "1Password for Safari" = 1569813296;
       Bear = 1091189122;
