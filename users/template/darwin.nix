@@ -387,10 +387,6 @@
             enabled = false;
             value = { parameters = [47 44 1179648]; type = "standard"; };
           };
-          "164" = {
-            enabled = false;
-            value = { parameters = [65535 65535 0]; type = "standard"; };
-          };
         };
       };
     };
