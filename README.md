@@ -68,7 +68,11 @@ $ git-crypt unlock <key>
 in the "new" machine.
 
 Finally, clone this repo and run `make`. Provide the `NIXSYSNAME` and
-`NIXUSER` if the default values don't suit you. If there are any errors,
-follow the error message (some folders may need permissions changed,
+`NIXUSER` if the default values don't suit you.
+
+```sh
+✗ NIXUSER=$(whoami) NIXSYSNAME=macbook-pro-mx-work make
+```
+
+If there are any errors, follow the error message (some folders may need permissions changed,
 some files may need to be deleted).
-That's it.
